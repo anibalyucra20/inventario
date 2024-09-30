@@ -1,14 +1,14 @@
 <?php
 
 const DB_HOST = "localhost";
-const DB_NAME = "inventario_ejercito";
-const DB_USER = "root";
-const DB_PASSWORD = "root";
+const DB_NAME = "";
+const DB_USER = "";
+const DB_PASSWORD = "";
 const DB_CHARSET = "utf8";
 
 
 
-const BASE_URL = "http://localhost:8888/inventario-ejercito/";
+const BASE_URL = "";
 
 
 
