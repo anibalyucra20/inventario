@@ -11,9 +11,9 @@ if ($vistas =="login" || $vistas =="404") {
 }else {
     
 
-    include BASE_URL."View/include/header.php";
+    include "./view/include/header.php";
     include $vistas;
-    include BASE_URL."View/include/footer.php"; 
+    include "./view/include/footer.php"; 
     }?>
 
 
