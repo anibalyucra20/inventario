@@ -1,38 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio de Sesión</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body, html {
-            height: 100%;
-        }
-        .bg-light {
-            background-color: #f8f9fa!important;
-        }
-        .center-content {
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .login-box {
-            width: 100%;
-            max-width: 400px;
-            padding: 15px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            background-color: white;
-        }
-    </style>
-</head>
-<body class="bg-light">
-    <div class="container center-content">
-        <div class="login-box">
-            <h2 class="text-center">Inicio</h2>
+<!-- page content -->
+<div class="right_col" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>INICIO</h3>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</body>
-</html>
+</div>
+<!-- /page content -->
+<script src="<?php BASE_URL ?>assets/js/functions_medicamento.js"></script>
