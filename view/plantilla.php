@@ -1,7 +1,7 @@
 
 
 <?php
-
+require_once "./config/config.php";
 require_once "./control/vistasControlador.php";
 $mostrar =  new vistasControlador();
 
@@ -11,9 +11,9 @@ if ($vistas =="login" || $vistas =="404") {
 }else {
     
 
-    include "./View/include/header.php";
+    include BASE_URL."View/include/header.php";
     include $vistas;
-    include "./View/include/footer.php"; 
+    include BASE_URL."View/include/footer.php"; 
     }?>
 
 
