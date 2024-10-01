@@ -6,7 +6,7 @@ $option = $_REQUEST['op'];
 
 
 
-$objCategorias = new categoriaModel();
+$objCategorias = new CategoriaModel();
 
 if ($option == "listar") {
     $arrResponse = array('status' => false, 'data' => "");
@@ -81,7 +81,7 @@ if ($option == "eliminar") {
     if ($_POST) {
         $id_categoria = $_POST['idcategoria'];
         $arrCategoria = $objCategorias->eliminarCategoria($id_categoria);
-        if ($arrCategoria->id > 0) {
+        if ($arrCategoria->res > 0) {
             $arrResponse = array('status' => true, 'msg' => "Eliminado correctamente", 'data' => $arrCategoria);
         } else {
             $arrResponse = array('status' => false, 'msg' => "Error al eliminar");
