@@ -21,7 +21,7 @@
                                 <label for="dni" class="form-label col-md-3">Dni (paciente):</label>
                                 <input type="hidden" id="id_consulta" name="id_consulta">
                                 <div class="col-md-6">
-                                    <input type="number" class="form-control col-md-6" id="dni" name="dni" placeholder="DNI" required>
+                                    <input type="number" class="form-control col-md-6" id="dni"placeholder="DNI" required>
                                 </div>
                                 <div class="col-md-3">
                                     <button type="button" class="btn btn-info col-md-2" onclick="buscarUsuarioDni();"><i class="fa fa-search"></i></button>
@@ -32,7 +32,7 @@
                                 <div class="col-md-9">
                                     <input type="hidden" id="id_paciente" name="id_paciente">
                                     <input type="hidden" id="id_usuario" name="id_usuario" value="1">
-                                    <input type="text" class="form-control" id="paciente" name="paciente" required readonly>
+                                    <input type="text" class="form-control" id="paciente" required readonly>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -51,24 +51,27 @@
                                 <label for="diagnostico_c" class="form-label col-md-3">Tratamiento:</label>
                                 <div class="col-md-1">
                                     <button type="button" class="btn btn-info" data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-plus"></i></button>
+
                                 </div>
 
                                 <div class="col-md-8">
-                                    <table class="table" id="tbl_tratamientos_consulta">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Medicamento</th>
-                                                <th>cantidad</th>
-                                                <th>Por hora</th>
-                                                <th>Por dia</th>
-                                                <th>Vía de Adm.</th>
-                                                <th>Acciones</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="tblTratamiento">
-                                        </tbody>
-                                    </table>
+                                    <div class="x_content">
+                                        <table class="table table-striped" id="tbl_tratamientos_consulta">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Medicamento</th>
+                                                    <th>cantidad</th>
+                                                    <th>Por hora</th>
+                                                    <th>Por dia</th>
+                                                    <th>Vía de Adm.</th>
+                                                    <th>Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tblTratamiento">
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
 
@@ -85,7 +88,7 @@
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
                                         </button>
-                                        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                                        <h4 class="modal-title" id="myModalLabel">Agregar Tratamiento</h4>
                                     </div>
                                     <form id="frm_tratamiento" class="form-horizontal form-label-left">
                                         <br>
@@ -94,9 +97,6 @@
                                             <div class="col-md-9">
                                                 <input type="text" class="form-control col-md-6" id="bmedicamento" name="bmedicamento" required onkeyup="buscar_medicamento();">
                                             </div>
-                                            <!--<div class="col-md-3">
-                                                <button type="button" class="btn btn-info col-md-2" onclick="buscar_medicamento();"><i class="fa fa-search"></i></button>
-                                            </div>-->
                                         </div>
                                         <div class="form-group">
                                             <input type="hidden" id="id_medicamento_frm" name="id_medicamento_frm">
@@ -149,6 +149,9 @@
                             </div>
                         </div>
                         <!-- /modals -->
+
+
+
                     </div>
                 </div>
             </div>

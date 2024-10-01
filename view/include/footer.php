@@ -17,6 +17,8 @@
 <script src="<?php echo BASE_URL ?>view/Gentella/vendors/fastclick/lib/fastclick.js"></script>
 <!-- NProgress -->
 <script src="<?php echo BASE_URL ?>view/Gentella/vendors/nprogress/nprogress.js"></script>
+<!-- iCheck -->
+<script src="<?php echo BASE_URL ?>view/Gentella/vendors/iCheck/icheck.min.js"></script>
 
 <!-- Custom Theme Scripts -->
 <script src="<?php echo BASE_URL ?>view/Gentella/build/js/custom.min.js"></script>

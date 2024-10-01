@@ -47,7 +47,6 @@ async function buscarConsultaRegistro() {
       document.querySelector('#motivo_c').value = json.data.motivo_consulta;
       document.querySelector('#diagnostico_c').value = json.data.diagnostico;
       document.querySelector('#id_consulta').value = json.data.id;
-      buscarPaciente()
     } else {
       swal("Usuario", json.msg, "error");
     }
@@ -174,7 +173,7 @@ async function buscartratamientos() {
         newtr.className = "element_tbl_tratamiento";
         cont++;
         newtr.innerHTML = `
-                  <th scope="row">${cont}</th>
+                  <td scope="row">${cont}</td>
                   <td>${item.nombre}</td>
                   <td>${item.cantidad}</td>
                   <td>${item.por_hora}</td>
@@ -183,6 +182,7 @@ async function buscartratamientos() {
                   <td>${item.options}</td>
           `;
         document.querySelector('#tbl_tratamientos_consulta').appendChild(newtr);
+        document.querySelector('#via_c_editar_' + item.id).value = item.via_administracion;
       });
     }
     console.log(resp);
@@ -241,26 +241,36 @@ if (document.querySelector('#frm_tratamiento')) {
 
 
 
-async function ActualizarCategoria() {
+async function actualizarTratamiento(id) {
   // se captura los campos
-  let id_c = document.querySelector('#id_c').value;
-  let strnombre = document.querySelector('#nombre').value;
+  let cantidad_t = document.querySelector('#cantidad_c_editar_' + id).value;
+  let hora_t = document.querySelector('#frecuencia_c_editar_' + id).value;
+  let dia_t = document.querySelector('#dias_c_editar_' + id).value;
+  let via_t = document.querySelector('#via_c_editar_' + id).value;
   // validar campos vacios
-  if (id_c == "" || strnombre == "") {
+  if (cantidad_t == "" || hora_t == "" || dia_t == "" || via_t == "") {
     alert('campos vacios');
     return;
   }
+  const formData = new FormData();
+  formData.append('idtratamiento', id);
+  formData.append('cantidad_t', cantidad_t);
+  formData.append('hora_t', hora_t);
+  formData.append('dia_t', dia_t);
+  formData.append('via_t', via_t);
   try {
-    const data = new FormData(frmEditar);
-    let resp = await fetch(base_url + 'control/Categoria.php?op=actualizar', {
+    let resp = await fetch(base_url + 'control/Tratamiento.php?op=actualizar', {
       method: 'POST',
       mode: 'cors',
       cache: 'no-cache',
-      body: data
+      body: formData
     });
     json = await resp.json();
     if (json.status) {
+
+      document.querySelector('button#cerrar_modal_editar_' + id).click();
       swal("Actualizar", json.msg, "success");
+      buscartratamientos();
     } else {
       swal("Actualizar", json.msg, "error");
     }
@@ -268,37 +278,32 @@ async function ActualizarCategoria() {
   } catch (error) {
     console.log('Ocurrio un error ' + error);
   }
-}
-if (document.querySelector('#frmEditar')) {
-  //evitar que se recargue la pantalla a la hora de enviar informacion
-  let frmEditar = document.querySelector('#frmEditar');
-  frmEditar.onsubmit = function (e) {
-    e.preventDefault();
-    ActualizarCategoria();
-  }
+
+
 }
 
 
-async function eliminarCategoria(id) {
+
+async function eliminarTratamiento(id) {
 
   swal({
-    title: "Realmente deseas eliminar la Categoría?",
+    title: "Realmente deseas el Tratamiento?",
     text: "",
     icon: "warning",
     buttons: true,
     dangerMode: true,
   }).then((willDelete) => {
     if (willDelete) {
-      fntEliminar(id);
+      fntEliminar_tratamiento(id);
     }
   })
 }
-async function fntEliminar(id) {
+async function fntEliminar_tratamiento(id) {
   const formData = new FormData();
-  formData.append('idcategoria', id);
+  formData.append('idtratamiento', id);
   try {
 
-    let resp = await fetch(base_url + 'control/Categoria.php?op=eliminar', {
+    let resp = await fetch(base_url + 'control/Tratamiento.php?op=eliminar', {
       method: 'POST',
       mode: 'cors',
       cache: 'no-cache',
@@ -307,12 +312,57 @@ async function fntEliminar(id) {
     json = await resp.json();
     if (json.status) {
       swal("Eliminar", json.msg, "success");
-      document.querySelector('#row_' + id).remove();
+      document.querySelector('#row_tratamiento_' + id).remove();
     } else {
       swal("Eliminar", json.msg, "error");
     }
     console.log(resp);
   } catch (error) {
     console.log("Ocurrio un error: " + error);
+  }
+}
+
+
+
+async function actualizarConsulta() {
+  // se captura los campos
+  let id_paciente = document.querySelector('#id_paciente').value;
+  let motivo_c = document.querySelector('#motivo_c').value;
+  let diagnostico_c = document.querySelector('#diagnostico_c').value;
+  let id_consulta = document.querySelector('#id_consulta').value;
+  let id_usuario = document.querySelector('#id_usuario').value;
+  // validar campos vacios
+  if (id_paciente == "" || motivo_c == "" || diagnostico_c == "" || id_consulta == "" || id_usuario == "") {
+    alert('campos vacios');
+    return;
+  }
+  try {
+    const data = new FormData(frmRegistro);
+    let resp = await fetch(base_url + 'control/Consultorio.php?op=actualizar', {
+      method: 'POST',
+      mode: 'cors',
+      cache: 'no-cache',
+      body: data
+    });
+    json = await resp.json();
+    if (json.status) {
+      swal("Actualizar", json.msg, "success");
+      location.href =base_url+"consultorio";
+    } else {
+      swal("Actualizar", json.msg, "error");
+    }
+    console.log(resp);
+  } catch (error) {
+    console.log('Ocurrio un error ' + error);
+  }
+
+}
+
+if (document.querySelector('#frmRegistro')) {
+  //evitar que se recargue la pantalla a la hora de enviar informacion
+  let frmRegistro = document.querySelector('#frmRegistro');
+  frmRegistro.onsubmit = function (e) {
+    e.preventDefault();
+    actualizarConsulta();
   }
 }

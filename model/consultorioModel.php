@@ -28,6 +28,17 @@ class ConsultorioModel
         return $sql;
     }
 
+    public function actualizarConsulta($id_consulta, $id_paciente, $id_usuario, $motivo_c, $diagnostico_c)
+    {
+        $sql = $this->conexion->query("CALL actualizarConsulta('{$id_consulta}','{$id_paciente}','{$id_usuario}','{$motivo_c}','{$diagnostico_c}')");
+        $sql = $sql->fetch_object();
+        return $sql;
+    }
+
+
+
+
+    
 
     public function registrarConsulta($codigo, $nombre, $descripcion, $presentacion, $stock, $fecha_vencimiento, $id_categoria)
     {
@@ -42,12 +53,7 @@ class ConsultorioModel
         $sql = $sql->fetch_object();
         return $sql;
     }
-    public function actualizarConsulta($id, $codigo, $nombre, $descripcion, $presentacion, $fecha_vencimiento, $id_categoria)
-    {
-        $sql = $this->conexion->query("CALL actualizarProducto('{$id}','{$codigo}','{$nombre}','{$descripcion}','{$presentacion}','{$fecha_vencimiento}','{$id_categoria}')");
-        $sql = $sql->fetch_object();
-        return $sql;
-    }
+    
     public function eliminarConsulta($id)
     {
         $sql = $this->conexion->query("CALL eliminarProducto('{$id}')");

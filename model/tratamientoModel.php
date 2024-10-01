@@ -26,6 +26,18 @@ class tratamientoModel
         }
         return $arrRegistros;
     }
+    public function actualizarTratamiento($id_tratamiento, $cantidad_t, $hora_t, $dia_t, $via_t)
+    {
+        $sql = $this->conexion->query("CALL actualizarTratamiento('{$id_tratamiento}','{$cantidad_t}','{$hora_t}','{$dia_t}','{$via_t}')");
+        $sql = $sql->fetch_object();
+        return $sql;
+    }
+    public function eliminarTratamiento($id)
+    {
+        $sql = $this->conexion->query("CALL eliminarTratamiento('{$id}')");
+        $sql = $sql->fetch_object();
+        return $sql;
+    }
 
 }
 
