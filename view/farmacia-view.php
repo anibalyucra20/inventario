@@ -11,7 +11,7 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                     <div class="x_title">
-                        <a href="<?php BASE_URL ?>nueva-consulta" class="btn btn-primary">+ Nuevo</a>
+                        <a href="<?php BASE_URL ?>nueva-atencion" class="btn btn-primary">+ Nuevo</a>
 
                         <div class="clearfix"></div>
                     </div>
@@ -26,7 +26,7 @@
                                     <th scope="col">Acciones</th>
                                 </tr>
                             </thead>
-                            <tbody id="tblConsulta">
+                            <tbody id="tblFarmacia">
                             </tbody>
                         </table>
                     </div>

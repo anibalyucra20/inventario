@@ -29,7 +29,7 @@ async function mostrar_consulta(id) {
 }
 async function getConsultas() {
   try {
-    let resp = await fetch(base_url + 'control/Consultorio.php?op=listar');
+    let resp = await fetch(base_url + 'control/Farmacia.php?op=listar');
     json = await resp.json();
     if (json.status) {
       let data = json.data;
@@ -45,7 +45,7 @@ async function getConsultas() {
                   <td>${item.motivo_consulta}</td>
                   <td>${item.options}</td>
           `;
-        document.querySelector('#tblConsulta').appendChild(newtr);
+        document.querySelector('#tblFarmacia').appendChild(newtr);
       });
     }
     console.log(json);
@@ -54,7 +54,7 @@ async function getConsultas() {
   }
 
 }
-if (document.querySelector('#tblConsulta')) {
+if (document.querySelector('#tblFarmacia')) {
   getConsultas();
 }
 
