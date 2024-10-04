@@ -1,3 +1,6 @@
+<?php
+require_once "./config/config.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,26 +30,31 @@
             background-color: white;
         }
     </style>
+    <script>
+        const base_url = '<?= BASE_URL ?>';
+    </script>
 </head>
 <body class="bg-light">
     <div class="container center-content">
         <div class="login-box">
             <h2 class="text-center">Inicio de Sesión</h2>
-            <form>
+            <form id="frm_iniciar_sesion">
                 <div class="form-group">
-                    <label for="email">Correo electrónico</label>
-                    <input type="email" class="form-control" id="email" placeholder="Introduce tu correo electrónico">
+                    <label for="usuario_inv">Usuario</label>
+                    <input type="text" class="form-control" id="usuario_inv" name="usuario_inv" placeholder="Introduce tu Usuario" required>
                 </div>
                 <div class="form-group">
                     <label for="password">Contraseña</label>
-                    <input type="password" class="form-control" id="password" placeholder="Introduce tu contraseña">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Introduce tu contraseña" required>
                 </div>
                 <button type="submit" class="btn btn-primary btn-block">Ingresar</button>
                 <div class="text-center mt-3">
-                    <a href="#">¿Olvidaste tu contraseña?</a>
+                    <!--<a href="#">¿Olvidaste tu contraseña?</a>-->
                 </div>
             </form>
         </div>
     </div>
 </body>
+<script src="<?php echo BASE_URL; ?>assets/js/functions_login.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </html>

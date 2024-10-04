@@ -1,3 +1,5 @@
+<?php session_start();
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -32,7 +34,7 @@
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Sistema</span></a>
+                        <a href="<?php echo BASE_URL; ?>inicio" class="site_title"><i class="fa fa-paw"></i> <span>Sistema</span></a>
                     </div>
 
                     <div class="clearfix"></div>
@@ -44,14 +46,14 @@
                         <div class="menu_section">
                             <h3>Menú de Navegación</h3>
                             <ul class="nav side-menu col-12">
-                                <li class="w-100"><a href="<?php BASE_URL ?>inicio"><i class="fa fa-home"></i> Inicio </a></li>
-                                <li><a href="<?php BASE_URL ?>usuarios"><i class="fa fa-home"></i> Usuarios </a></li>
-                                <li><a href="<?php BASE_URL ?>consultorio"><i class="fa fa-home"></i> Consultorio </a></li>
+                                <li class="w-100"><a href="<?php echo BASE_URL; ?>inicio"><i class="fa fa-home"></i> Inicio </a></li>
+                                <li><a href="<?php echo BASE_URL; ?>usuarios"><i class="fa fa-home"></i> Usuarios </a></li>
+                                <li><a href="<?php echo BASE_URL; ?>consultorio"><i class="fa fa-home"></i> Consultorio </a></li>
                                 <li><a><i class="fa fa-edit"></i> Farmacia <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="<?php BASE_URL ?>farmacia">Atención</a></li>
-                                        <li><a href="<?php BASE_URL ?>medicamento">Medicamentos</a></li>
-                                        <li><a href="<?php BASE_URL ?>categorias">Categorías</a></li>
+                                        <li><a href="<?php echo BASE_URL; ?>farmacia">Atención</a></li>
+                                        <li><a href="<?php echo BASE_URL; ?>medicamento">Medicamentos</a></li>
+                                        <li><a href="<?php echo BASE_URL; ?>categorias">Categorías</a></li>
                                     </ul>
                                 </li>
 
@@ -73,19 +75,21 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li class="">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="" alt="">John Doe
+                                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png" alt=""><?php echo $_SESSION['nombres_inventario']; ?>
                                     <span class=" fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu pull-right">
-                                    <li><a href="javascript:;"> Profile</a></li>
+                                    <!--<li><a href="javascript:;"> Profile</a></li>
                                     <li>
                                         <a href="javascript:;">
                                             <span class="badge bg-red pull-right">50%</span>
                                             <span>Settings</span>
                                         </a>
                                     </li>
-                                    <li><a href="javascript:;">Help</a></li>
-                                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                                    <li><a href="javascript:;">Help</a></li>-->
+                                    <li>
+                                        <a href="#" onclick="cerrar_sesion();"><i class="fa fa-sign-out pull-right"></i> Cerrar Sesión</a>
+                                    </li>
                                 </ul>
                             </li>
                         </ul>

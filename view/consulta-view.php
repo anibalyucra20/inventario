@@ -3,7 +3,7 @@
     <div class="">
         <div class="page-title">
             <div class="title_left">
-                <h3>Nueva Consulta</h3>
+                <h3>Ver Consulta</h3>
             </div>
 
 
@@ -74,10 +74,9 @@
                                     </div>
                                 </div>
                             </div>
-
                             <br>
                             <div>
-                                <button type="submit" class="btn btn-success">Registrar</button>
+                                <button type="submit" class="btn btn-success">Actualizar</button>
                                 <a href="<?php echo BASE_URL ?>consultorio" class="btn btn-success">Cancelar</a>
                             </div>
                         </form>
@@ -149,9 +148,6 @@
                             </div>
                         </div>
                         <!-- /modals -->
-
-
-
                     </div>
                 </div>
             </div>
@@ -159,7 +155,8 @@
     </div>
 </div>
 <!-- /page content -->
-<script src="<?php BASE_URL ?>assets/js/functions_consulta.js"></script>
+<script src="<?php echo BASE_URL ?>assets/js/functions_consulta.js"></script>
 <script>
-    buscarConsultaRegistro();
+    const id="<?php $pagina=explode("/", $_GET['views']); echo $pagina['1']?>";
+    mostrar_consulta(id);
 </script>

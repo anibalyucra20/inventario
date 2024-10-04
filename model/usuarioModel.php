@@ -1,7 +1,8 @@
 <?php
 require_once "../librerias/conexion.php";
 
-class UsuarioModel{
+class UsuarioModel
+{
     private $conexion;
 
     function __construct()
@@ -10,7 +11,8 @@ class UsuarioModel{
         $this->conexion = $this->conexion->conect();
     }
 
-    public function ListarUsuarios(){
+    public function ListarUsuarios()
+    {
         $arrUsuarios = array();
         $rs = $this->conexion->query("CALL buscar_Usuarios()");
 
@@ -22,20 +24,23 @@ class UsuarioModel{
 
 
 
-    public function getUsuario($id){
+    public function getUsuario($id)
+    {
         $sql = $this->conexion->query("SELECT * FROM usuarios WHERE id='$id'");
         $sql = $sql->fetch_object();
         return $sql;
     }
-    public function getUsuarioDni($dni){
+    public function getUsuarioDni($dni)
+    {
         $sql = $this->conexion->query("SELECT * FROM usuarios WHERE dni='$dni'");
         $sql = $sql->fetch_object();
         return $sql;
     }
 
-
-
+    public function registrarUsuario($dni, $cip, $nombres, $fecha_nacimiento, $genero, $talla, $peso, $grado, $cia, $tipo_usuario, $password)
+    {
+        $sql = $this->conexion->query("CALL registrar_usuario('{$dni}','{$cip}','{$nombres}','{$fecha_nacimiento}','{$genero}','{$talla}','{$peso}','{$grado}','{$cia}','{$tipo_usuario}','{$password}')");
+        $sql = $sql->fetch_object();
+        return $sql;
+    }
 }
-
-
-?>

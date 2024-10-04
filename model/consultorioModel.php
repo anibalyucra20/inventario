@@ -34,30 +34,11 @@ class ConsultorioModel
         $sql = $sql->fetch_object();
         return $sql;
     }
-
-
-
-
-    
-
-    public function registrarConsulta($codigo, $nombre, $descripcion, $presentacion, $stock, $fecha_vencimiento, $id_categoria)
-    {
-        $sql = $this->conexion->query("CALL registrar_producto('{$codigo}','{$nombre}','{$descripcion}','{$presentacion}','{$stock}','{$fecha_vencimiento}','{$id_categoria}')");
-        $sql = $sql->fetch_object();
-        return $sql;
-    }
-
     public function getConsulta($id)
     {
-        $sql = $this->conexion->query("CALL buscar_productoporId('{$id}')");
+        $sql = $this->conexion->query("CALL buscarConsultaId('{$id}')");
         $sql = $sql->fetch_object();
         return $sql;
     }
-    
-    public function eliminarConsulta($id)
-    {
-        $sql = $this->conexion->query("CALL eliminarProducto('{$id}')");
-        $sql = $sql->fetch_object();
-        return $sql;
-    }
+   
 }

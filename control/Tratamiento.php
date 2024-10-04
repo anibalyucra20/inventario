@@ -144,10 +144,10 @@ if ($option == "eliminar") {
     if ($_POST) {
         $id_tratamiento = $_POST['idtratamiento'];
         $arrTratamientos = $objTratamiento->eliminarTratamiento($id_tratamiento);
-        if ($arrTratamientos->id_p > 0) {
-            $arrResponse = array('status' => true, 'msg' => "Eliminado correctamente", 'data' => $arrTratamientos);
-        } else {
+        if ($arrTratamientos->res > 0) {
             $arrResponse = array('status' => false, 'msg' => "Error al eliminar");
+        } else {
+            $arrResponse = array('status' => true, 'msg' => "Eliminado correctamente", 'data' => $arrTratamientos);
         }
         echo json_encode($arrResponse);
     }

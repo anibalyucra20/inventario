@@ -16,7 +16,7 @@ if ($option == "listar") {
         for ($i = 0; $i < count($arrConsulta); $i++) {
             $id_consulta = $arrConsulta[$i]->id;
             $options = '<a class="btn btn-outline-info" href="' . BASE_URL . 'consulta/' . $id_consulta . '"><i class="fa-solid fa-pen-to-square"></i></a>
-        <button class="btn btn-outline-danger" onclick="eliminarConsulta(' . $id_consulta . ');"><i class="fa-solid fa-trash"></i></button>';
+        ';
             $arrConsulta[$i]->options = $options;
         }
         $arrResponse['status'] = true;
@@ -45,7 +45,22 @@ if ($option == "buscar_registro") {
     die();
 }
 if ($option == "ver") {
-    # code...
+    if ($_POST) {
+        //print_r($_POST);
+        if (empty($_POST['id_consulta'])) {
+            $arrResponse = array('status' => false, 'msg' => "Error, Campos vacíos");
+        } else {
+            $id_consulta = trim($_POST['id_consulta']);
+            $arrConsulta = $objConsulta->getConsulta($id_consulta);
+            if (empty($arrConsulta)) {
+                $arrResponse = array('status' => false, 'msg' => "Error, No se pudo Crear Consulta");
+            } else {
+                $arrResponse = array('status' => true, 'msg' => "Datos encontrados", 'data' => $arrConsulta);
+            }
+            echo json_encode($arrResponse);
+        }
+    }
+    die();
 }
 if ($option == "actualizar") {
     //print_r($_POST);
