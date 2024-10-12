@@ -8,7 +8,6 @@ setlocale(LC_ALL, "es_ES");
 // Extend the TCPDF class to create custom Header and Footer
 class MYPDF extends TCPDF
 {
-
     // Page footer
     public function Footer()
     {
