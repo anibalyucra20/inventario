@@ -60,7 +60,7 @@ $footer = '
         <tr>
             <td>1</td>
             <td>'.BASE_URL.'</td>
-            <td></td>
+            <td>'.$_SERVER['HTTP_HOST'].'</td>
             <td></td>
             <td></td>
             <td></td>
