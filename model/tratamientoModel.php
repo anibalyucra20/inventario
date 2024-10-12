@@ -19,7 +19,7 @@ class tratamientoModel
     public function getTratamientos($id_consulta)
     {
         $arrRegistros = array();
-        $rs = $this->conexion->query("SELECT tratamiento.id, tratamiento.id_atencion_consultorio, tratamiento.cantidad, tratamiento.por_hora, tratamiento.por_dia, tratamiento.via_administracion, producto.nombre FROM tratamiento INNER JOIN producto ON tratamiento.id_medicamento = producto.id WHERE id_atencion_consultorio='$id_consulta'");
+        $rs = $this->conexion->query("SELECT tratamiento.id, tratamiento.id_atencion_consultorio, tratamiento.cantidad, tratamiento.por_hora, tratamiento.por_dia, tratamiento.via_administracion, producto.nombre, tratamiento.id_medicamento FROM tratamiento INNER JOIN producto ON tratamiento.id_medicamento = producto.id WHERE id_atencion_consultorio='$id_consulta'");
 
         while ($obj = $rs->fetch_object()) {
             array_push($arrRegistros,$obj);

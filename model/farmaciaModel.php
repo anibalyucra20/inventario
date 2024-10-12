@@ -20,19 +20,17 @@ class FarmaciaModel
         }
         return $arrRegistros;
     }
-    public function getConsultaRegistro($id_usuario)
+
+    public function registrarSalida($tipo, $id_tratamiento, $id_medicamento, $cantidad, $detalle, $procedencia, $id_usuario)
     {
-        $sql = $this->conexion->query("CALL buscar_consulta_registro('{$id_usuario}')");
+      
+        $sql = $this->conexion->query("CALL registrarSalida('{$tipo}', '{$id_tratamiento}', '{$id_medicamento}', '{$cantidad}', '{$detalle}', '{$procedencia}', '{$id_usuario}')");
+        
         $sql = $sql->fetch_object();
         return $sql;
     }
 
-    public function actualizarConsulta($id_consulta, $id_paciente, $id_usuario, $motivo_c, $diagnostico_c)
-    {
-        $sql = $this->conexion->query("CALL actualizarConsulta('{$id_consulta}','{$id_paciente}','{$id_usuario}','{$motivo_c}','{$diagnostico_c}')");
-        $sql = $sql->fetch_object();
-        return $sql;
-    }
+
     public function getConsulta($id)
     {
         $sql = $this->conexion->query("CALL buscarConsultaId('{$id}')");

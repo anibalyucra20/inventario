@@ -39,6 +39,17 @@ class ProductoModel
         }
         return $arrRegistros;
     }
+    public function getProductoStock($id)
+    {
+        $sql = $this->conexion->query("SELECT stock FROM producto WHERE id='{$id}'");
+        $sql = $sql->fetch_object();
+        return $sql;
+    }
+    public function actualizarCantidad($id, $cantidad){
+        $sql = $this->conexion->query("CALL actualizarCantidadMedicamento('{$id}', '{$cantidad}')");
+        $sql = $sql->fetch_object();
+        return $sql;
+    }
 
     public function getProducto($id)
     {

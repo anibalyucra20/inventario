@@ -56,8 +56,12 @@
                                         <li><a href="<?php echo BASE_URL; ?>categorias">Categorías</a></li>
                                     </ul>
                                 </li>
-
-
+                                <li><a><i class="fa fa-edit"></i> Reportes <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="<?php echo BASE_URL; ?>reporte-consulta">Reportes de Consultas</a></li>
+                                        <li><a href="<?php echo BASE_URL; ?>reporte-atencion">Reporte de Atención</a></li>
+                                    </ul>
+                                </li>
                             </ul>
                         </div>
                     </div>

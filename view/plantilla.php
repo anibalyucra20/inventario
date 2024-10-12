@@ -5,15 +5,10 @@ require_once "./control/vistasControlador.php";
 $mostrar =  new vistasControlador();
 
 $vistas = $mostrar->obtener_vistas_controlador();
-if ($vistas == "login" || $vistas == "404") {
+if ($vistas == "login" || $vistas == "404" || $vistas == 'i-reporte-consulta' || $vistas == 'i-reporte-atencion') {
     require_once "./view/" . $vistas . "-view.php";
 } else {
-        include "./view/include/header.php";
-        include $vistas;
-        include "./view/include/footer.php";
-    
-} ?>
-
-
-
-    
+    include "./view/include/header.php";
+    include $vistas;
+    include "./view/include/footer.php";
+}
