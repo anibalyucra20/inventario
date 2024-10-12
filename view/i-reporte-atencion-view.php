@@ -1,7 +1,7 @@
 <?php
 require_once "./config/config.php";
 require_once('./librerias/tcpdf/tcpdf.php');
-//require_once('./model/consultorioModel.php');
+require_once('./model/consultorioModel.php');
 //$objConsulta = new ConsultorioModel();
 
 setlocale(LC_ALL, "es_ES");
