@@ -1,8 +1,8 @@
 <?php
 require_once "./config/config.php";
 require_once('./librerias/tcpdf/tcpdf.php');
-require_once('./model/consultorioModel.php');
-$objConsulta = new ConsultorioModel();
+//require_once('./model/consultorioModel.php');
+//$objConsulta = new ConsultorioModel();
 
 setlocale(LC_ALL, "es_ES");
 // Extend the TCPDF class to create custom Header and Footer
@@ -36,7 +36,7 @@ $pdf->SetAutoPageBreak(TRUE, 10);
 $pdf->SetFont('helvetica', '', 11);
 $pdf->AddPage('P', 'A3');
 
-$arrConsulta = $objConsulta->getConsultas();
+//$arrConsulta = $objConsulta->getConsultas();
 
 $footer = '
 <table border="1" cellpadding="4" cellspacing="0" width="100%">
