@@ -6,8 +6,8 @@ if ($_SESSION['id_inventario']=='' || $_SESSION['nombres_inventario']=='' || $_S
     
 } else {
 
-
-    require_once('../librerias/tcpdf/tcpdf.php');
+    require_once("./config/config.php");
+    require_once(BASE_URL . "librerias/tcpdf/tcpdf.php");
     require_once '../model/consultorioModel.php';
     $objConsulta = new ConsultorioModel();
 
