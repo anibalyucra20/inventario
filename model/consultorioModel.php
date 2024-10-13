@@ -1,5 +1,5 @@
 <?php
-require_once "./librerias/conexion.php";
+require "../librerias/conexion.php";
 
 class ConsultorioModel
 {
@@ -15,6 +15,16 @@ class ConsultorioModel
     {
         $arrRegistros = array();
         $rs = $this->conexion->query("CALL buscarConsultas()");
+
+        while ($obj = $rs->fetch_object()) {
+            array_push($arrRegistros, $obj);
+        }
+        return $arrRegistros;
+    }
+    public function getConsultasReporte($id_usuario, $fecha)
+    {
+        $arrRegistros = array();
+        $rs = $this->conexion->query("SELECT atencion_consultorio.id, atencion_consultorio.id_responsable_atencion, atencion_consultorio.id_paciente, atencion_consultorio.fecha_hora, atencion_consultorio.diagnostico, atencion_consultorio.motivo_consulta, usuarios.dni, usuarios.apellidos_nombres, usuarios.cip, usuarios.fecha_nacimiento, usuarios.genero, usuarios.talla, usuarios.peso, usuarios.grado, usuarios.cia FROM atencion_consultorio JOIN usuarios ON atencion_consultorio.id_paciente = usuarios.id WHERE atencion_consultorio.id_responsable_atencion ='{$id_usuario}' AND atencion_consultorio.fecha_hora LIKE '{$fecha}%' AND atencion_consultorio.estado=1 ORDER BY atencion_consultorio.fecha_hora ASC;");
 
         while ($obj = $rs->fetch_object()) {
             array_push($arrRegistros, $obj);

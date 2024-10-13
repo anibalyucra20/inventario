@@ -1,5 +1,3 @@
-<?php session_start();
-?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -79,7 +77,7 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li class="">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png" alt=""><?php echo $_SESSION['nombres_inventario']; ?>
+                                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png" alt=""><?php if(isset($_SESSION['nombres_inventario'])){ echo $_SESSION['nombres_inventario']; }  ?>
                                     <span class=" fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu pull-right">

@@ -1,5 +1,5 @@
 <?php
-require_once "./config/config.php";
+require "../config/config.php";
 
 class Conexion{
     public static function conect(){

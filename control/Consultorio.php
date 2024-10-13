@@ -1,6 +1,6 @@
 <?php
 
-require_once "../model/consultorioModel.php";
+require "../model/consultorioModel.php";
 
 $option = $_REQUEST['op'];
 

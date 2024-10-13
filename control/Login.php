@@ -1,13 +1,12 @@
 <?php
+require_once("../config/config.php");
+require_once("../model/usuarioModel.php");
 
-require_once "../model/loginModel.php";
-require_once "../model/usuarioModel.php";
 
 $option = $_REQUEST['op'];
 
 
 
-$objLogin = new LoginModel();
 $objUsuario = new UsuarioModel();
 
 if ($option == "iniciar_sesion") {

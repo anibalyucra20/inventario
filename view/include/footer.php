@@ -24,7 +24,7 @@
 <script src="<?php echo BASE_URL ?>view/Gentella/build/js/custom.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="<?php echo BASE_URL; ?>assets/js/functions_login.js"></script>
-<?php
+<?php 
 if (!isset($_SESSION['id_inventario']) || !isset($_SESSION['nombres_inventario']) || !isset($_SESSION['tipo_inventario'])) {
   ?>
   <script>cerrar_sesion();</script>

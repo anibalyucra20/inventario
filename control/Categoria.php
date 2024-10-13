@@ -1,6 +1,6 @@
 <?php
 
-require_once "../model/categoriaModel.php";
+require "../model/categoriaModel.php";
 
 $option = $_REQUEST['op'];
 

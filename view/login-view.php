@@ -31,7 +31,7 @@ require_once "./config/config.php";
         }
     </style>
     <script>
-        const base_url = '<?= BASE_URL ?>';
+        const base_url = '<?php echo BASE_URL; ?>';
     </script>
 </head>
 <body class="bg-light">
