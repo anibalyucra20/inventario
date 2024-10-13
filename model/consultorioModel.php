@@ -1,5 +1,5 @@
 <?php
-require "../librerias/conexion.php";
+require "./librerias/conexion.php";
 
 class ConsultorioModel
 {
