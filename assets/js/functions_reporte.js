@@ -12,9 +12,10 @@ async function reporte_consultas() {
             body: formData
         });
         json = await resp.json();
+        let caja = document.querySelector('#imprimir_form');
         if (json.status) {
             let data = json.data;
-            let caja = document.querySelector('#imprimir_form');
+            
             let content = ``;
             let cont = 0;
             let tratamientos = '';
@@ -73,6 +74,8 @@ async function reporte_consultas() {
                 `
             });
             caja.innerHTML = content;
+        }else{
+            caja.innerHTML = '';
         }
         console.log(json);
 
