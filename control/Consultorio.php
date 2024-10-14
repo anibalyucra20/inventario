@@ -74,7 +74,7 @@ if ($option == "actualizar") {
             $motivo_c = ucwords(trim($_POST['motivo_c']));
             $diagnostico_c = ucwords(trim($_POST['diagnostico_c']));
 
-            $arrConsulta= $objConsulta->actualizarConsulta($id_consulta, $id_paciente, $id_usuario, $motivo_c, $diagnostico_c);
+            $arrConsulta = $objConsulta->actualizarConsulta($id_consulta, $id_paciente, $id_usuario, $motivo_c, $diagnostico_c);
             //print_r($arrProducto);
             if ($arrConsulta->id_consulta_p > 0) {
                 $arrResponse = array('status' => true, 'msg' => "Datos Actualizados correctamente");
@@ -86,6 +86,34 @@ if ($option == "actualizar") {
     }
     die();
 }
-if ($option == "eliminar") {
-    # code...
+if ($option == "reporte") {
+    //print_r($_POST);
+
+    if ($_POST) {
+        if (empty($_POST['id_usuario'])) {
+            $arrResponse = array('status' => false, 'msg' => "Error, de sesión");
+        } else {
+            $id_usuario = trim($_POST['id_usuario']);
+            $fecha = trim($_POST['fecha']);
+            $arrResponse = array('status' => false, 'data' => "");
+            $arrConsulta = $objConsulta->getConsultasReporte($id_usuario, $fecha);
+
+            if (!empty($arrConsulta)) {
+                for ($i = 0; $i < count($arrConsulta); $i++) {
+                    $nacimiento = $arrConsulta[$i]->fecha_nacimiento;
+                    $fch = explode("-", $nacimiento);
+                    $tfecha = $fch[2] . "-" . $fch[1] . "-" . $fch[0];
+
+                    $dias = explode("-", $tfecha, 3);
+                    $dias = mktime(0, 0, 0, $dias[1], $dias[0], $dias[2]);
+                    $edad = (int)((time() - $dias) / 31556926);
+                    $arrConsulta[$i]->edad = '' . $edad . '';
+                }
+                $arrResponse['status'] = true;
+                $arrResponse['data'] = $arrConsulta;
+            }
+            echo json_encode($arrResponse);
+        }
+    }
+    die();
 }

@@ -11,7 +11,6 @@ async function mostrar_consulta(id) {
     });
     json = await resp.json();
     if (json.status) {
-      document.querySelector('#id_usuario').value = json.data.id_responsable_atencion;
       document.querySelector('#dni').value = json.data.dni;
       document.querySelector('#id_paciente').value = json.data.id_paciente;
       document.querySelector('#paciente').value = json.data.apellidos_nombres;
@@ -60,7 +59,7 @@ if (document.querySelector('#tblConsulta')) {
 
 async function buscarConsultaRegistro() {
   //mostrar consulta sin activar
-  let usuario = document.querySelector('#id_usuario').value;
+  let usuario = document.querySelector('#id_usu_sesion').value;
   const formData = new FormData();
   formData.append('id_usuario', usuario);
   try {

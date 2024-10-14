@@ -31,7 +31,7 @@
                                 <label for="paciente" class="form-label col-md-3">Paciente:</label>
                                 <div class="col-md-9">
                                     <input type="hidden" id="id_paciente" name="id_paciente">
-                                    <input type="hidden" id="id_usuario" name="id_usuario" value="1">
+                                    <input type="hidden" id="id_usuario" name="id_usuario" value="<">
                                     <input type="text" class="form-control" id="paciente" required readonly>
                                 </div>
                             </div>
