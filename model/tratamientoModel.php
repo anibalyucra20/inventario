@@ -26,6 +26,14 @@ class tratamientoModel
         }
         return $arrRegistros;
     }
+    public function getTratamiento($id){
+        $arrRegistros = array();
+        $sql = $this->conexion->query("SELECT tratamiento.id, tratamiento.id_atencion_consultorio, tratamiento.cantidad, tratamiento.por_hora, tratamiento.por_dia, tratamiento.via_administracion, producto.nombre, producto.presentacion, tratamiento.id_medicamento FROM tratamiento INNER JOIN producto ON tratamiento.id_medicamento = producto.id WHERE tratamiento.id='$id'");
+        while ($obj = $sql->fetch_object()) {
+            array_push($arrRegistros,$obj);
+        }
+        return $sql;
+    }
     public function actualizarTratamiento($id_tratamiento, $cantidad_t, $hora_t, $dia_t, $via_t)
     {
         $sql = $this->conexion->query("CALL actualizarTratamiento('{$id_tratamiento}','{$cantidad_t}','{$hora_t}','{$dia_t}','{$via_t}')");

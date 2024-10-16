@@ -1,3 +1,82 @@
+async function reporte_farmacia() {
+    let usuario = document.querySelector('#id_usu_sesion').value;
+    let fecha_reporte = document.querySelector('#fecha_reporte').value;
+    const formData = new FormData();
+    formData.append('id_usuario', usuario);
+    formData.append('fecha', fecha_reporte);
+    try {
+        let resp = await fetch(base_url + 'control/Farmacia.php?op=reporte', {
+            method: 'POST',
+            mode: 'cors',
+            cache: 'no-cache',
+            body: formData
+        });
+        json = await resp.json();
+        let caja = document.querySelector('#contenido_reporte_farmacia');
+        if (json.status) {
+            let data = json.data;
+            let content = ``;
+            let cont = 0;
+            data.forEach(item=> {
+                cont++;
+                console.log();
+
+                content +=`
+                <table border="1" cellpadding="4" cellspacing="0" width="100%">
+            <tr>
+                <th>N. Atención</th>
+                <th>Fecha</th>
+                <th>CIA</th>
+                <th>GRADO</th>
+                <th>DNI/CIP</th>
+                <th>EDAD</th>
+                <th colspan="2">APELLIDOS Y NOMBRES</th>
+            </tr>
+            <tr>
+                <td rowspan="2">${cont}</td>
+                <td>${item.fecha}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td colspan="2"></td>
+            </tr>
+            <tr>
+                <th colspan="2">DIAGNOSTICO</th>
+                <td colspan="3"></td>
+                <th>PERSONAL</th>
+                <td></td>
+            </tr>
+            <tr>
+                <th colspan="3">TRATAMIENTO</th>
+                <th>PPT</th>
+                <th>CANTIDAD</th>
+                <th>X HORAS</th>
+                <th>X DIAS</th>
+                <th>VIA DE ADMINISTRACION</th>
+            </tr>
+            <tr>
+                <td colspan="3">${item.datos_tratamiento.nombre}</td>
+                <td>${item.datos_tratamiento.presentacion}</td>
+                <td>${item.datos_tratamiento.cantidad}</td>
+                <td>${item.datos_tratamiento.por_hora}</td>
+                <td>${item.datos_tratamiento.por_dia}</td>
+                <td>${item.datos_tratamiento.via_administracion}</td>
+            </tr>
+    </table>
+    <br>
+                `;
+            });
+            caja.innerHTML = content;
+        } else {
+            caja.innerHTML = '';
+        }
+        console.log(json);
+
+    } catch (e) {
+        console.log('Ocurrio error al cargar consulta ' + e);
+    }
+}
 async function reporte_consultas() {
     let usuario = document.querySelector('#id_usu_sesion').value;
     let fecha_reporte = document.querySelector('#fecha_reporte').value;
@@ -12,24 +91,20 @@ async function reporte_consultas() {
             body: formData
         });
         json = await resp.json();
-        let caja = document.querySelector('#imprimir_form');
+        let caja = document.querySelector('#contenido_reporte_consulta');
         if (json.status) {
             let data = json.data;
-            
+
             let content = ``;
             let cont = 0;
-            let tratamientos = '';
-            pp = '';
             data.forEach(item => {
-                tratamientos =  buscar_tratamiento(item.id).then(function(resultadoActual){ 
-                    return resultadoActual.data;
-                 });
-                tratamientos.then(function (result) {
-                    console.log(result);
-                });
-                console.log(pp);
-                //tratamientos.then(function(actualResult) { console.log(actualResult); });
                 cont++;
+                let tratamientos = ``;
+                let cont_t = 0;
+                item.datos_tratamiento.forEach(trata =>{
+                    cont_t ++;
+                    tratamientos += `${cont_t}.- ${trata.nombre} - ${trata.cantidad} - cada ${trata.por_hora} horas X ${trata.por_dia} dias <br>`;
+                })
                 content += `
                 
 <table border="1" cellpadding="4" cellspacing="0" width="100%">
@@ -68,13 +143,13 @@ async function reporte_consultas() {
 </tr>
 <tr>
     <td colspan="5">${item.motivo_consulta}</td>
-    <td colspan="4">${pp}</td>
+    <td colspan="4">${tratamientos}</td>
 </tr>
 </table><br>
                 `
             });
             caja.innerHTML = content;
-        }else{
+        } else {
             caja.innerHTML = '';
         }
         console.log(json);
@@ -88,32 +163,7 @@ if (document.querySelector('#imprimir_form')) {
 }
 
 
-async function buscar_tratamiento(id) {
-    const form_2 = new FormData();
-    form_2.append('id_consulta', id);
-    
-    try {
-        let resp_2 = await fetch(base_url + 'control/Tratamiento.php?op=listar', {
-            method: 'POST',
-            mode: 'cors',
-            cache: 'no-cache',
-            body: form_2
-        });
-        json_2 = await resp_2.json();
-        let tratamientos = '';
-        if (json_2.status) {
-            let data_2 = json_2.data;
-            data_2.forEach(item => {
-                tratamientos = item.nombre;
-            })
-        }
-        
-        //console.log(json_2);
-        return json_2;
-    } catch (error) {
-        console.log('Ocurrio error al cargar tratamientos ' + error);
-    }
-}
+
 function imprimir_r_consultas() {
     var element = document.getElementById('imprimir_form');
     html2pdf(element);

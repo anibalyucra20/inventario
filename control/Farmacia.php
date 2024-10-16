@@ -2,6 +2,8 @@
 
 require_once "../model/farmaciaModel.php";
 require_once "../model/productoModel.php";
+require_once "../model/tratamientoModel.php";
+
 
 $option = $_REQUEST['op'];
 
@@ -11,6 +13,7 @@ session_start();
 
 $objFarmacia = new FarmaciaModel();
 $objMedicamento = new ProductoModel();
+$objTratamiento = new tratamientoModel();
 
 if ($option == "listar") {
     $arrResponse = array('status' => false, 'data' => "");
@@ -65,6 +68,45 @@ if ($option == "registrar_salida") {
 
 
 
+            echo json_encode($arrResponse);
+        }
+    }
+    die();
+}
+if ($option == "reporte") {
+    //print_r($_POST);
+
+    if ($_POST) {
+        if (empty($_POST['id_usuario'])) {
+            $arrResponse = array('status' => false, 'msg' => "Error, de sesión");
+        } else {
+            $id_usuario = trim($_POST['id_usuario']);
+            $fecha = trim($_POST['fecha']);
+            $arrResponse = array('status' => false, 'data' => "");
+            $arrFarmacia = $objFarmacia->getConsultasReporte($id_usuario, $fecha);
+
+            if (!empty($arrFarmacia)) {
+                for ($i = 0; $i < count($arrFarmacia); $i++) {
+
+                    $id_trata = $arrFarmacia[$i]->id_tratamiento;
+                    $arrTratamientos = $objTratamiento->getTratamiento($id_trata);
+                    foreach ($arrTratamientos as $datos) {
+                        $arrFarmacia[$i]->datos_tratamiento = $datos;
+                    }
+                    
+
+                    /*$nacimiento = $arrFarmacia[$i]->fecha_nacimiento;
+                    $fch = explode("-", $nacimiento);
+                    $tfecha = $fch[2] . "-" . $fch[1] . "-" . $fch[0];
+
+                    $dias = explode("-", $tfecha, 3);
+                    $dias = mktime(0, 0, 0, $dias[1], $dias[0], $dias[2]);
+                    $edad = (int)((time() - $dias) / 31556926);
+                    $arrFarmacia[$i]->edad = '' . $edad . '';*/
+                }
+                $arrResponse['status'] = true;
+                $arrResponse['data'] = $arrFarmacia;
+            }
             echo json_encode($arrResponse);
         }
     }

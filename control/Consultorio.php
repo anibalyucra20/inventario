@@ -1,12 +1,15 @@
 <?php
 
-require "../model/consultorioModel.php";
+require_once "../model/consultorioModel.php";
+require_once "../model/productoModel.php";
+require_once "../model/tratamientoModel.php";
 
 $option = $_REQUEST['op'];
 
 
 
 $objConsulta = new ConsultorioModel();
+$objTratamiento = new tratamientoModel();
 
 if ($option == "listar") {
     $arrResponse = array('status' => false, 'data' => "");
@@ -100,6 +103,11 @@ if ($option == "reporte") {
 
             if (!empty($arrConsulta)) {
                 for ($i = 0; $i < count($arrConsulta); $i++) {
+                    $id_trata = $arrConsulta[$i]->id;
+
+                    $arrTratamientos = $objTratamiento->getTratamientos($id_trata);
+                    $arrConsulta[$i]->datos_tratamiento = $arrTratamientos;
+
                     $nacimiento = $arrConsulta[$i]->fecha_nacimiento;
                     $fch = explode("-", $nacimiento);
                     $tfecha = $fch[2] . "-" . $fch[1] . "-" . $fch[0];

@@ -57,6 +57,15 @@ class ProductoModel
         $sql = $sql->fetch_object();
         return $sql;
     }
+    public function getProductoId($id)
+    {
+        $arrRegistros = array();
+        $sql = $this->conexion->query("SELECT * FROM producto WHERE id='{$id}'");
+        while ($obj = $sql->fetch_object()) {
+            array_push($arrRegistros, $obj);
+        }
+        return $sql;
+    }
     public function actualizarProducto($id, $codigo, $nombre, $descripcion, $presentacion, $fecha_vencimiento, $id_categoria)
     {
         $sql = $this->conexion->query("CALL actualizarProducto('{$id}','{$codigo}','{$nombre}','{$descripcion}','{$presentacion}','{$fecha_vencimiento}','{$id_categoria}')");

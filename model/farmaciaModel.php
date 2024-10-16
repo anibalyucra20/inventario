@@ -37,5 +37,15 @@ class FarmaciaModel
         $sql = $sql->fetch_object();
         return $sql;
     }
+    public function getConsultasReporte($id_usuario, $fecha)
+    {
+        $arrRegistros = array();
+        $rs = $this->conexion->query("SELECT * FROM movimientos WHERE id_responsable_atención='{$id_usuario}' AND fecha LIKE '{$fecha}%'");
+
+        while ($obj = $rs->fetch_object()) {
+            array_push($arrRegistros, $obj);
+        }
+        return $arrRegistros;
+    }
    
 }
