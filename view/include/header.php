@@ -46,16 +46,16 @@
                             <h3>Menú de Navegación</h3>
                             <ul class="nav side-menu col-12">
                                 <li class="w-100"><a href="<?php echo BASE_URL; ?>inicio"><i class="fa fa-home"></i> Inicio </a></li>
-                                <li><a href="<?php echo BASE_URL; ?>usuarios"><i class="fa fa-home"></i> Usuarios </a></li>
-                                <li><a href="<?php echo BASE_URL; ?>consultorio"><i class="fa fa-home"></i> Consultorio </a></li>
-                                <li><a><i class="fa fa-edit"></i> Farmacia <span class="fa fa-chevron-down"></span></a>
+                                <li><a href="<?php echo BASE_URL; ?>usuarios"><i class="fa fa-user"></i> Usuarios </a></li>
+                                <li><a href="<?php echo BASE_URL; ?>consultorio"><i class="fa fa-user-md"></i> Consultorio </a></li>
+                                <li><a><i class="fa fa-medkit"></i> Farmacia <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="<?php echo BASE_URL; ?>farmacia">Atención</a></li>
                                         <li><a href="<?php echo BASE_URL; ?>medicamento">Medicamentos</a></li>
                                         <li><a href="<?php echo BASE_URL; ?>categorias">Categorías</a></li>
                                     </ul>
                                 </li>
-                                <li><a><i class="fa fa-edit"></i> Reportes <span class="fa fa-chevron-down"></span></a>
+                                <li><a><i class="fa fa-bar-chart"></i> Reportes <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="<?php echo BASE_URL; ?>reporte-consulta">Reportes de Consultas</a></li>
                                         <li><a href="<?php echo BASE_URL; ?>reporte-atencion">Reporte de Atención</a></li>
