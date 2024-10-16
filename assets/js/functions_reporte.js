@@ -164,7 +164,7 @@ if (document.querySelector('#imprimir_form')) {
 
 
 
-function imprimir_r_consultas() {
+function imprimir_reporte() {
     var element = document.getElementById('imprimir_form');
     html2pdf(element);
 }

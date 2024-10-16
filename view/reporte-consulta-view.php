@@ -26,7 +26,7 @@
 
                         </form>
                         <br>
-                        <button type="button" class="btn btn-primary" onclick="imprimir_r_consultas();">Imprimir</button>
+                        <button type="button" class="btn btn-primary" onclick="imprimir_reporte();">Imprimir</button>
                         <br>
                         <div class="clearfix"></div>
                     </div>
