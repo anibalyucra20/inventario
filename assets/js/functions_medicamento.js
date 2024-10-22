@@ -1,5 +1,7 @@
 async function getProductos() {
+  // capturador de errores
   try {
+    // llamar al controlador producto.php con la operacion llamada LISTAR
     let resp = await fetch(base_url + 'control/Producto.php?op=listar');
     json = await resp.json();
     if (json.status) {
@@ -23,7 +25,7 @@ async function getProductos() {
     }
     console.log(json);
   } catch (error) {
-    console.log('Ocurrio error al cargar medicamenteo ' + error);
+    console.log('Ocurrio error al cargar medicamentos ' + error);
   }
 }
 

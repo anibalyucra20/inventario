@@ -14,6 +14,7 @@ class ProductoModel
     public function getProductos()
     {
         $arrRegistros = array();
+        // llamar al procedemiento almacenado en BD - buscar_Productos
         $rs = $this->conexion->query("CALL buscar_Productos()");
 
         while ($obj = $rs->fetch_object()) {

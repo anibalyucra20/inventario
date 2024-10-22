@@ -1,4 +1,5 @@
 <!-- page content -->
+<!-- se agrega el header-->
 <div class="right_col" role="main">
     <div class="">
         <div class="page-title">
@@ -40,3 +41,4 @@
 </div>
 <!-- /page content -->
 <script src="<?php BASE_URL ?>assets/js/functions_medicamento.js"></script>
+<!-- se agrega el footer-->

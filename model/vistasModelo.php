@@ -5,10 +5,10 @@ class vistasModelo
     /*------- modelo para obtener vistas  */
     protected static function obtener_vistas_modelo($vistas)
     {
-        $lista_blanca = ['inicio', 'usuarios', 'nuevo-usuario', 'editar-usuario', 'medicamento', 'editar-medicamento', 'nuevo-medicamento', 'categorias', 'nueva-categoria', 'editar-categoria', 'consultorio', 'nueva-consulta', 'consulta', 'ver-consulta', 'farmacia', 'nueva-atencion', 'reporte-consulta', 'reporte-atencion'];
-        if (1==1) {
+        $palabras_permitidas = ['inicio', 'usuarios', 'nuevo-usuario', 'editar-usuario', 'medicamento', 'editar-medicamento', 'nuevo-medicamento', 'categorias', 'nueva-categoria', 'editar-categoria', 'consultorio', 'nueva-consulta', 'consulta', 'ver-consulta', 'farmacia', 'nueva-atencion', 'reporte-consulta', 'reporte-atencion'];
+        if (isset($_SESSION['id_inventario'])) {
             //isset($_SESSION['id_inventario'])
-            if (in_array($vistas, $lista_blanca)) {
+            if (in_array($vistas, $palabras_permitidas)) {
                 if (is_file("./view/" . $vistas . "-view.php")) {
                     $contenido = "./view/" . $vistas . "-view.php";
                 } else {

@@ -9,7 +9,10 @@ $option = $_REQUEST['op'];
 $objProducto = new productoModel();
 
 if ($option == "listar") {
+    // array de respuesta
     $arrResponse = array('status' => false, 'data' => "");
+
+    // llamar a la funcion getProductos del modelo
     $arrProducto = $objProducto->getProductos();
 
     if (!empty($arrProducto)) {
