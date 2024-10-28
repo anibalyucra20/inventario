@@ -81,10 +81,46 @@ if ($option == "ver_dni") {
 
 
 if ($option == "actualizar") {
-    # code...
+    //print_r($_POST);
+    if ($_POST) {
+        if (empty($_POST['id']) || empty($_POST['dni']) || empty($_POST['cip']) || empty($_POST['nombres']) || empty($_POST['fecha_nacimiento']) || empty($_POST['genero']) || empty($_POST['talla']) || empty($_POST['peso']) || empty($_POST['grado']) || empty($_POST['cia']) || empty($_POST['tipo_usuario'])) {
+            $arrResponse = array('status' => false, 'msg' => "Error de datos");
+        } else {
+            $id = trim($_POST['id']);
+            $dni = trim($_POST['dni']);
+            $cip = ucwords(trim($_POST['cip']));
+            $nombres = ucwords(trim($_POST['nombres']));
+            $fecha_nacimiento = ucwords(trim($_POST['fecha_nacimiento']));
+            $genero = trim($_POST['genero']);
+            $talla = trim($_POST['talla']);
+            $peso = trim($_POST['peso']);
+            $grado = trim($_POST['grado']);
+            $cia = trim($_POST['cia']);
+            $tipo_usuario = trim($_POST['tipo_usuario']);
+
+            $arrUsuario = $objUsuario->actualizarUsuario($id, $dni, $cip, $nombres, $fecha_nacimiento, $genero, $talla, $peso, $grado, $cia, $tipo_usuario);
+            //print_r($arrUsuario);
+            if ($arrUsuario->id_p > 0) {
+                $arrResponse = array('status' => true, 'msg' => "Datos Actualizados correctamente");
+            } else {
+                $arrResponse = array('status' => false, 'msg' => "Error al Actualizar datos, Código ya existe");
+            }
+            echo json_encode($arrResponse);
+        }
+    }
+    die();
 }
 
 
 if ($option == "eliminar") {
-    # code...
+    if ($_POST) {
+        $id_usuario = $_POST['idusuario'];
+        $arrUsuario = $objUsuario->eliminarUsario($id_usuario);
+        if (empty($arrUsuario)) {
+            $arrResponse = array('status' => false, 'msg' => "Error al eliminar");
+        } else {
+            $arrResponse = array('status' => true, 'msg' => "Eliminado correctamente", 'data' => $arrUsuario);
+        }
+        echo json_encode($arrResponse);
+    }
 }

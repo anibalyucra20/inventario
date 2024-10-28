@@ -43,4 +43,16 @@ class UsuarioModel
         $sql = $sql->fetch_object();
         return $sql;
     }
+    public function actualizarUsuario($id, $dni, $cip, $nombres, $fecha_nacimiento, $genero, $talla, $peso, $grado, $cia, $tipo_usuario)
+    {
+        $sql = $this->conexion->query("CALL actualizarUsuario('{$id}','{$dni}','{$cip}','{$nombres}','{$fecha_nacimiento}','{$genero}','{$talla}','{$peso}','{$grado}','{$cia}','{$tipo_usuario}')");
+        $sql = $sql->fetch_object();
+        return $sql;
+    }
+    public function eliminarUsario($id)
+    {
+        $sql = $this->conexion->query("CALL eliminarUsuario('{$id}')");
+        $sql = $sql->fetch_object();
+        return $sql;
+    }
 }

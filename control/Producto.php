@@ -121,6 +121,4 @@ if ($option == "eliminar") {
         echo json_encode($arrResponse);
     }
 }
-
-
 die();

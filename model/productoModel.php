@@ -9,8 +9,6 @@ class ProductoModel
         $this->conexion = new Conexion();
         $this->conexion = $this->conexion->conect();
     }
-
-
     public function getProductos()
     {
         $arrRegistros = array();
@@ -22,8 +20,6 @@ class ProductoModel
         }
         return $arrRegistros;
     }
-
-
     public function registrarProducto($codigo, $nombre, $descripcion, $presentacion, $stock, $fecha_vencimiento, $id_categoria)
     {
         $sql = $this->conexion->query("CALL registrar_producto('{$codigo}','{$nombre}','{$descripcion}','{$presentacion}','{$stock}','{$fecha_vencimiento}','{$id_categoria}')");
