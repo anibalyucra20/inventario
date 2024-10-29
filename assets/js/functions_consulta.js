@@ -39,6 +39,7 @@ async function getConsultas() {
         cont++;
         newtr.innerHTML = `
                   <th scope="row">${cont}</th>
+                  <td>${item.id}</td>
                   <td>${item.fecha_hora}</td>
                   <td>${item.apellidos_nombres}</td>
                   <td>${item.motivo_consulta}</td>

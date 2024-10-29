@@ -5,7 +5,7 @@ class vistasModelo
     /*------- modelo para obtener vistas  */
     protected static function obtener_vistas_modelo($vistas)
     {
-        $palabras_permitidas = ['inicio', 'usuarios', 'nuevo-usuario', 'editar-usuario', 'medicamento', 'editar-medicamento', 'nuevo-medicamento', 'categorias', 'nueva-categoria', 'editar-categoria', 'consultorio', 'nueva-consulta', 'consulta', 'ver-consulta', 'farmacia', 'nueva-atencion', 'reporte-consulta', 'reporte-atencion'];
+        $palabras_permitidas = ['inicio', 'usuarios', 'nuevo-usuario', 'editar-usuario', 'medicamento', 'editar-medicamento', 'nuevo-medicamento', 'categorias', 'nueva-categoria', 'editar-categoria', 'consultorio', 'nueva-consulta', 'consulta', 'ver-consulta', 'farmacia', 'nueva-atencion', 'reporte-consulta', 'reporte-atencion', 'imprimir-consulta'];
         if (isset($_SESSION['id_inventario'])) {
             //isset($_SESSION['id_inventario'])
             if (in_array($vistas, $palabras_permitidas)) {

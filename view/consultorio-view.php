@@ -20,6 +20,7 @@
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
+                                    <th scope="col">Código</th>
                                     <th scope="col">fecha</th>
                                     <th scope="col">paciente</th>
                                     <th scope="col">motivo de consulta</th>
