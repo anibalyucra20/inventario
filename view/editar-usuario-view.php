@@ -68,7 +68,7 @@
                             <br>
                             <div>
                                 <button type="submit" class="btn btn-success">Actualizar</button>
-                                <a href="<?php BASE_URL ?>usuarios" class="btn btn-success">Cancelar</a>
+                                <a href="<?php echo BASE_URL; ?>usuarios" class="btn btn-success">Cancelar</a>
                             </div>
                         </form>
                     </div>
