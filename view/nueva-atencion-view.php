@@ -70,8 +70,7 @@
 
                             <br>
                             <div>
-                                <button type="submit" class="btn btn-success">Registrar</button>
-                                <a href="<?php echo BASE_URL ?>consultorio" class="btn btn-success">Cancelar</a>
+                                <a href="<?php echo BASE_URL ?>farmacia" class="btn btn-success">Regresar</a>
                             </div>
                         </form>
                         
