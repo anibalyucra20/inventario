@@ -12,10 +12,9 @@ async function getConsultas() {
         cont++;
         newtr.innerHTML = `
                   <th scope="row">${cont}</th>
-                  <td>${item.fecha_hora}</td>
+                  <td>${item.fecha}</td>
                   <td>${item.apellidos_nombres}</td>
-                  <td>${item.motivo_consulta}</td>
-                  <td>${item.options}</td>
+                  <td>${item.nombre}</td>
           `;
         document.querySelector('#tblFarmacia').appendChild(newtr);
       });

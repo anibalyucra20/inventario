@@ -14,7 +14,7 @@ class FarmaciaModel
     public function getAtenciones()
     {
         $arrRegistros = array();
-        $rs = $this->conexion->query("SELECT atencion_farmacia.id, atencion_farmacia.id_atencion_consultorio, atencion_farmacia.fecha_hora, atencion_consultorio.motivo_consulta, usuarios.apellidos_nombres FROM atencion_farmacia JOIN atencion_consultorio ON atencion_farmacia.id_atencion_consultorio = atencion_consultorio.id JOIN usuarios ON atencion_consultorio.id_paciente = usuarios.id ORDER BY atencion_farmacia.fecha_hora DESC;");
+        $rs = $this->conexion->query("SELECT movimientos.id,movimientos.fecha, producto.nombre, usuarios.apellidos_nombres FROM movimientos JOIN producto ON movimientos.id_medicamento = producto.id JOIN tratamiento ON movimientos.id_tratamiento = tratamiento.id JOIN atencion_consultorio ON tratamiento.id_atencion_consultorio = atencion_consultorio.id JOIN usuarios ON atencion_consultorio.id_paciente = usuarios.id ORDER BY movimientos.fecha DESC;");
         while ($obj = $rs->fetch_object()) {
             array_push($arrRegistros, $obj);
         }

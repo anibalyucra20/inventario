@@ -23,7 +23,6 @@
                                     <th scope="col">fecha</th>
                                     <th scope="col">paciente</th>
                                     <th scope="col">motivo de consulta</th>
-                                    <th scope="col">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody id="tblFarmacia">
