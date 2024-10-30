@@ -1,3 +1,72 @@
+async function obtener_usuario(id) {
+    const formData = new FormData();
+    formData.append('id_usuario', id);
+    try {
+        let resp = await fetch(base_url + 'control/Usuario.php?op=ver_id', {
+            method: 'POST',
+            mode: 'cors',
+            cache: 'no-cache',
+            body: formData
+        });
+        json = await resp.json();
+        let caja = document.querySelector('#encabezado_reporte');
+        if (json.status) {
+            let data = json.data;
+            let fecha = document.querySelector('#fecha_reporte').value;
+            let content = `
+            <table cellpadding="4" cellspacing="0" width="100%">
+                                <tr>
+                                    <th></th>
+                                    <th rowspan="5" colspan="8" >REGISTRO DE ATENCION DIARIA EN CONSULTORIO MEDICO
+                                        PUESTO DE SALUD BCT "LOS CABITOS Nro 51"
+                                    </th>
+                                    <th colspan="2" width="25%" style="border: solid 1px black;">FIRMA O SELLO DEL RESPONSABLE</th>
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <th colspan="2" style="border: solid 1px black;">
+                                        <br><br>
+                                        <br><br>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <th colspan="2">
+                                        <br>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <th colspan="2" style="border: solid 1px black;">TURNO DE ATENCION</th>
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <th style="border: solid 1px black;">M</th>
+                                    <th style="border: solid 1px black;">T</th>
+                                </tr>
+                                <tr>
+                                    <th width="5%"></th>
+                                    <th style="border: solid 1px black;">FECHAS</th>
+                                    <th colspan="4" style="border: solid 1px black;">NOMBRE DEL ESTABLECIMIENTO DE SALUD</th>
+                                    <th colspan="5" width="50%" style="border: solid 1px black;">NOMBRE DEL RESPONSABLE DE ATENCION</th>
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <th style="border: solid 1px black;">${fecha}</th>
+                                    <th colspan="4" style="border: solid 1px black;">LOS CABITOS NRO 51</th>
+                                    <th style="border: solid 1px black;" width="4%">DNI</th>
+                                    <th style="border: solid 1px black;" width="15%">${data.dni}</th>
+                                    <th colspan="3" style="border: solid 1px black;" width="35%">${data.apellidos_nombres}</th>
+                                </tr>
+                            </table>
+                            <br>
+            `;
+            caja.innerHTML = content;
+        }
+    } catch (error) {
+        console.log('Ocurrio error al cargar usuario ' + error);
+    }
+}
 async function reporte_farmacia() {
     let usuario = document.querySelector('#id_usu_sesion').value;
     let fecha_reporte = document.querySelector('#fecha_reporte').value;
@@ -35,17 +104,17 @@ async function reporte_farmacia() {
             <tr>
                 <td rowspan="2">${cont}</td>
                 <td>${item.fecha}</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td colspan="2"></td>
+                <td>${item.datos_paciente.cia}</td>
+                <td>${item.datos_paciente.grado}</td>
+                <td>${item.datos_paciente.dni}</td>
+                <td>${item.datos_paciente.edad}</td>
+                <td colspan="2">${item.datos_paciente.apellidos_nombres}</td>
             </tr>
             <tr>
                 <th colspan="2">DIAGNOSTICO</th>
-                <td colspan="3"></td>
+                <td colspan="3">${item.datos_paciente.diagnostico}</td>
                 <th>PERSONAL</th>
-                <td></td>
+                <td>${item.datos_responsable.apellidos_nombres}</td>
             </tr>
             <tr>
                 <th colspan="3">TRATAMIENTO</th>
@@ -113,7 +182,7 @@ async function reporte_consultas() {
     <th colspan="3">NOMBRES Y APELLIDOS DEL PACIENTE</th>
     <td colspan="3">${item.apellidos_nombres}</td>
     <th colspan="2">FECHA DE NACIMIENTO</th>
-    <td></td>
+    <td>${item.fecha_nacimiento}</td>
 </tr>
 <tr>
     <th>FECHA</th>

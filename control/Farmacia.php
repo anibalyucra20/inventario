@@ -3,6 +3,7 @@
 require_once "../model/farmaciaModel.php";
 require_once "../model/productoModel.php";
 require_once "../model/tratamientoModel.php";
+require_once "../model/usuarioModel.php";
 
 
 $option = $_REQUEST['op'];
@@ -14,6 +15,7 @@ session_start();
 $objFarmacia = new FarmaciaModel();
 $objMedicamento = new ProductoModel();
 $objTratamiento = new tratamientoModel();
+$objUsuario = new UsuarioModel();
 
 if ($option == "listar") {
     $arrResponse = array('status' => false, 'data' => "");
@@ -87,13 +89,28 @@ if ($option == "reporte") {
 
             if (!empty($arrFarmacia)) {
                 for ($i = 0; $i < count($arrFarmacia); $i++) {
-
                     $id_trata = $arrFarmacia[$i]->id_tratamiento;
+                    $id_responsable = $arrFarmacia[$i]->id_responsable_atención;
                     $arrTratamientos = $objTratamiento->getTratamiento($id_trata);
                     foreach ($arrTratamientos as $datos) {
                         $arrFarmacia[$i]->datos_tratamiento = $datos;
+                        $id_consulta = $datos['id_atencion_consultorio'];
+                        $arrPaciente = $objUsuario->getUsuarioIdConsulta($id_consulta);
+
+                        $nacimiento = $arrPaciente->fecha_nacimiento;
+                        $fch = explode("-", $nacimiento);
+                        $tfecha = $fch[2] . "-" . $fch[1] . "-" . $fch[0];
+
+                        $dias = explode("-", $tfecha, 3);
+                        $dias = mktime(0, 0, 0, $dias[1], $dias[0], $dias[2]);
+                        $edad = (int)((time() - $dias) / 31556926);
+                        $arrPaciente->edad = '' . $edad . '';
+
+                        $arrResponsable = $objUsuario->getUsuario($id_responsable);
+                        $arrFarmacia[$i]->datos_paciente = $arrPaciente;
+                        $arrFarmacia[$i]->datos_responsable = $arrResponsable;
                     }
-                    
+
 
                     /*$nacimiento = $arrFarmacia[$i]->fecha_nacimiento;
                     $fch = explode("-", $nacimiento);

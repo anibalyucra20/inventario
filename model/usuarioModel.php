@@ -55,4 +55,10 @@ class UsuarioModel
         $sql = $sql->fetch_object();
         return $sql;
     }
+    public function getUsuarioIdConsulta($id_consulta)
+    {
+        $sql = $this->conexion->query("SELECT usuarios.dni,usuarios.cia, usuarios.grado, usuarios.apellidos_nombres, usuarios.fecha_nacimiento, atencion_consultorio.diagnostico FROM usuarios JOIN atencion_consultorio ON atencion_consultorio.id_paciente = usuarios.id WHERE atencion_consultorio.id='{$id_consulta}';");
+        $sql = $sql->fetch_object();
+        return $sql;
+    }
 }
