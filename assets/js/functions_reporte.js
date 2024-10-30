@@ -236,13 +236,13 @@ if (document.querySelector('#imprimir_form')) {
 function imprimir_reporte() {
     var element = document.getElementById('imprimir_form');
     var opt = {
-        margin:       1,
+        margin:       0.5,
         filename:     'reporte sistema inventario.pdf',
         image:        { type: 'jpeg', quality: 0.98 },
         html2canvas:  { scale: 2 },
         jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
       };
-      
+
       html2pdf().set(opt).from(element).save();
 
       // Old monolithic-style usage:
