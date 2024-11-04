@@ -19,7 +19,7 @@ if ($option == "listar") {
         for ($i = 0; $i < count($arrConsulta); $i++) {
             $id_consulta = $arrConsulta[$i]->id;
             $options = '<a class="btn btn-outline-info" href="' . BASE_URL . 'consulta/' . $id_consulta . '"><i class="fa-solid fa-pen-to-square"></i></a>
-            <a class="btn btn-outline-info" href="' . BASE_URL . 'imprimir-consulta/' . $id_consulta . '"><i class="fa-solid fa-print"></i></a>
+            <a class="btn btn-outline-info" href="' . BASE_URL . 'ver-consulta/' . $id_consulta . '"><i class="fa-solid fa-print"></i></a>
         ';
             $arrConsulta[$i]->options = $options;
         }

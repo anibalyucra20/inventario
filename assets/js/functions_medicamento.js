@@ -117,6 +117,7 @@ async function mostrar_producto(id) {
       document.querySelector('#presentacion').value = json.data.presentacion;
       document.querySelector('#fecha_vencimiento').value = json.data.fecha_vencimiento;
       document.querySelector('#id_categoria').value = json.data.id_categoria;
+      document.querySelector('#stock').value = json.data.stock;
     } else {
       window.location = base_url + "medicamento";
     }
@@ -137,8 +138,9 @@ async function ActualizarMedicamento() {
   let strpresentacion = document.querySelector('#presentacion').value;
   let datefecha_vencimiento = document.querySelector('#fecha_vencimiento').value;
   let intid_categoria = document.querySelector('#id_categoria').value;
+  let stock = document.querySelector('#stock').value;
   // validar campos vacios
-  if (id_med == "" || strcodigo == "" || strnombre == "" || strdescripcion == "" || strpresentacion == "" || datefecha_vencimiento == "" || intid_categoria == "") {
+  if (id_med == "" || strcodigo == "" || strnombre == "" || strdescripcion == "" || strpresentacion == "" || datefecha_vencimiento == "" || intid_categoria == "" || stock == "") {
     alert('campos vacios');
     return;
   }

@@ -86,7 +86,7 @@ if ($option == "ver") {
 if ($option == "actualizar") {
     //print_r($_POST);
     if ($_POST) {
-        if (empty($_POST['id_m']) || empty($_POST['codigo']) || empty($_POST['nombre']) || empty($_POST['descripcion']) || empty($_POST['presentacion']) || empty($_POST['fecha_vencimiento']) || empty($_POST['id_categoria'])) {
+        if (empty($_POST['id_m']) || empty($_POST['codigo']) || empty($_POST['nombre']) || empty($_POST['descripcion']) || empty($_POST['presentacion']) || empty($_POST['fecha_vencimiento']) || empty($_POST['id_categoria']) || empty($_POST['stock'])) {
             $arrResponse = array('status' => false, 'msg' => "Error de datos");
         } else {
             $id_med = trim($_POST['id_m']);
@@ -96,8 +96,9 @@ if ($option == "actualizar") {
             $presentacion = ucwords(trim($_POST['presentacion']));
             $fecha_vencimiento = trim($_POST['fecha_vencimiento']);
             $id_categoria = trim($_POST['id_categoria']);
+            $stock = trim($_POST['stock']);
 
-            $arrProducto = $objProducto->actualizarProducto($id_med, $codigo, $nombre, $descripcion, $presentacion, $fecha_vencimiento, $id_categoria);
+            $arrProducto = $objProducto->actualizarProducto($id_med, $codigo, $nombre, $descripcion, $presentacion, $fecha_vencimiento, $id_categoria, $stock);
             //print_r($arrProducto);
             if ($arrProducto->id_p > 0) {
                 $arrResponse = array('status' => true, 'msg' => "Datos Actualizados correctamente");

@@ -47,6 +47,10 @@
                                     <option value=""></option>
                                 </select>
                             </div>
+                            <div class="mb-3">
+                                <label for="stock" class="form-label">Stock</label>
+                                <input type="number" class="form-control" id="stock" name="stock" placeholder="stock" required>
+                            </div>
                             <br>
                             <div>
                                 <button type="submit" class="btn btn-primary">Actualizar</button>

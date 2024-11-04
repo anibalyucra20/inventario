@@ -17,6 +17,9 @@ async function mostrar_consulta(id) {
       document.querySelector('#motivo_c').value = json.data.motivo_consulta;
       document.querySelector('#diagnostico_c').value = json.data.diagnostico;
       document.querySelector('#id_consulta').value = json.data.id;
+      if (document.querySelector('#imprimir_form')) {
+        document.querySelector('#codigo').value = json.data.id;
+      }
     } else {
       swal("Conaultorio", json.msg, "error");
     }
@@ -46,6 +49,7 @@ async function getConsultas() {
                   <td>${item.options}</td>
           `;
         document.querySelector('#tblConsulta').appendChild(newtr);
+
       });
     }
     console.log(json);
@@ -201,7 +205,17 @@ async function buscartratamientos() {
         newtr.id = "row_tratamiento_" + item.id;
         newtr.className = "element_tbl_tratamiento";
         cont++;
-        newtr.innerHTML = `
+        if (document.querySelector('#imprimir_form')) {
+          newtr.innerHTML = `
+                  <td scope="row">${cont}</td>
+                  <td>${item.nombre}</td>
+                  <td>${item.cantidad}</td>
+                  <td>${item.por_hora}</td>
+                  <td>${item.por_dia}</td>
+                  <td>${item.via_administracion}</td>
+          `;
+        } else {
+          newtr.innerHTML = `
                   <td scope="row">${cont}</td>
                   <td>${item.nombre}</td>
                   <td>${item.cantidad}</td>
@@ -210,8 +224,8 @@ async function buscartratamientos() {
                   <td>${item.via_administracion}</td>
                   <td>${item.options}</td>
           `;
+        }
         document.querySelector('#tbl_tratamientos_consulta').appendChild(newtr);
-        document.querySelector('#via_c_editar_' + item.id).value = item.via_administracion;
       });
     }
     console.log(resp);
@@ -376,7 +390,7 @@ async function actualizarConsulta() {
     json = await resp.json();
     if (json.status) {
       swal("Actualizar", json.msg, "success");
-      location.href =base_url+"consultorio";
+      location.href = base_url + "consultorio";
     } else {
       swal("Actualizar", json.msg, "error");
     }
@@ -394,4 +408,21 @@ if (document.querySelector('#frmRegistro')) {
     e.preventDefault();
     actualizarConsulta();
   }
+}
+
+
+function imprimir_reporte() {
+  var element = document.getElementById('imprimir_form');
+  var opt = {
+    margin: 0.5,
+    filename: 'atencion en consultorio.pdf',
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 2 },
+    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+  };
+  console.log('imprimir');
+  html2pdf().set(opt).from(element).save();
+
+  // Old monolithic-style usage:
+  html2pdf(element, opt);
 }
