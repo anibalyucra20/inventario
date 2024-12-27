@@ -1,10 +1,6 @@
 <?php
 require_once("../model/usuarioModel.php");
-
-
 $option = $_REQUEST['op'];
-
-
 
 $objUsuario = new UsuarioModel();
 
