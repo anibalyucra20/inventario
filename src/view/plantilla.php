@@ -44,7 +44,7 @@ if (isset($_SESSION['sesion_sigi_id']) && isset($_SESSION['sesion_sigi_token']))
     }
 }
 
-if ($vista == "login" || $vista == "404" || $vista == "intranet") {
+if ($vista == "login" || $vista == "404") {
     require_once "./src/view/" . $vista . ".php";
 } else {
 
