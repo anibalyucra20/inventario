@@ -1,7 +1,4 @@
 <?php
-
-require_once "./config/config.php";
-require_once "./control/vistasControlador.php";
-
-$plantilla = new vistasControlador();
-$plantilla->obtener_plantilla_controlador();
+require_once "src/control/vistas_control.php";
+$vista = new vistasControlador();
+$vista->obtenerPlantillaControlador();
