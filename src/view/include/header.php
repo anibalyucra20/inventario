@@ -119,7 +119,7 @@
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="topnav-components">
                                             <a href="<?php echo BASE_URL ?>usuarios" class="dropdown-item">Usuarios</a>
-                                            <a href="<?php echo BASE_URL ?>institucion" class="dropdown-item">Instituciones</a>
+                                            <a href="<?php echo BASE_URL ?>instituciones" class="dropdown-item">Instituciones</a>
                                             <a href="<?php echo BASE_URL ?>ambientes" class="dropdown-item">Ambientes</a>
                                             <a href="<?php echo BASE_URL ?>bienes" class="dropdown-item">Bienes</a>
                                             <a href="<?php echo BASE_URL ?>movimientos" class="dropdown-item">Movimientos</a>
