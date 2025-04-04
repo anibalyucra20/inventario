@@ -28,14 +28,6 @@
                             </div>
                         </div>
                         <div class="form-group row mb-3 col-6">
-                            <label for="busqueda_tabla_pe" class="col-5 col-form-label">Programa de Estudios:</label>
-                            <input type="hidden" id="pe_actual_filtro" value="0">
-                            <div class="col-7">
-                                <select class="form-control" name="busqueda_tabla_pe" id="busqueda_tabla_pe">
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row mb-3 col-6">
                             <label for="busqueda_tabla_estado" class="col-5 col-form-label">Estado:</label>
                             <div class="col-7">
                                 <select class="form-control" name="busqueda_tabla_estado" id="busqueda_tabla_estado">
@@ -45,15 +37,6 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group row mb-3 col-6">
-                            <label for="busqueda_tabla_sede" class="col-5 col-form-label">Estado:</label>
-                            <input type="hidden" id="sede_actual_filtro" value="0">
-                            <div class="col-7">
-                                <select class="form-control" name="busqueda_tabla_sede" id="busqueda_tabla_sede">
-                                </select>
-                            </div>
-                        </div>
-
                     </div>
                     <div class="form-group mb-0 text-center ">
                         <button type="button" class="btn btn-primary waves-effect waves-light" onclick="numero_pagina(1);"><i class="fa fa-search"></i> Buscar</button>
@@ -92,7 +75,6 @@
                 </div>
 
                 <div id="modals_editar"></div>
-                <div id="modals_permisos"></div>
 
             </div>
         </div>
@@ -100,6 +82,6 @@
 </div>
 <script src="<?php echo BASE_URL; ?>src/view/js/functions_usuario.js"></script>
 <script>
-    listar_docentesOrdenados();
+    listar_usuariosOrdenados();
 </script>
 <!-- end page title -->

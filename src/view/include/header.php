@@ -149,5 +149,5 @@
                         </div>
                     </div>
                     <script>
-                        cargar_datos_menu(<?php echo $_SESSION['sesion_sigi_sede']; ?>, <?php echo $_SESSION['sesion_sigi_periodo']; ?>);
+                        //cargar_datos_menu(<?php echo $_SESSION['sesion_sigi_sede']; ?>, <?php echo $_SESSION['sesion_sigi_periodo']; ?>);
                     </script>

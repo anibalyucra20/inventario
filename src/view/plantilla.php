@@ -33,9 +33,9 @@ if (isset($_SESSION['sesion_sigi_id']) && isset($_SESSION['sesion_sigi_token']))
     if ($err) {
         echo "cURL Error #:" . $err; // mostramos el error
     } else {
-        //echo $response; // en caso de funcionar correctamente
-        //echo $_SESSION['sesion_sigi_id'];
-        //echo $_SESSION['sesion_sigi_token'];
+        /*echo $response; // en caso de funcionar correctamente
+        echo $_SESSION['sesion_sigi_id'];
+        echo $_SESSION['sesion_sigi_token'];*/
     }
     //$arrSesion = $objSesion->verificar_sesion_si_activa($_SESSION['sesion_sigi_id'], $_SESSION['sesion_sigi_token']);
     if (!$response) {

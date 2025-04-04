@@ -12,7 +12,7 @@ class SessionModel
     }
     public function registrarSesion($id_usuario, $fecha_hora_inicio, $fecha_hora_fin, $token)
     {
-        $sql = $this->conexion->query("INSERT INTO sigi_sesiones (id_usuario , fecha_hora_inicio, fecha_hora_fin, token) VALUES ('$id_usuario','$fecha_hora_inicio','$fecha_hora_fin','$token')");
+        $sql = $this->conexion->query("INSERT INTO sesiones (id_usuario , fecha_hora_inicio, fecha_hora_fin, token) VALUES ('$id_usuario','$fecha_hora_inicio','$fecha_hora_fin','$token')");
         if ($sql) {
             $sql = $this->conexion->insert_id;
         } else {
@@ -26,7 +26,7 @@ class SessionModel
         $hora_actual = strtotime('-1 minute', strtotime($hora_actuals));
         $hora_actual = date("Y-m-d H:i:s", $hora_actual);
 
-        $b_sesion = $this->conexion->query("SELECT * FROM sigi_sesiones WHERE id='$id_sesion'");
+        $b_sesion = $this->conexion->query("SELECT * FROM sesiones WHERE id='$id_sesion'");
         $datos_sesion = $b_sesion->fetch_object();
 
         $fecha_hora_fin_sesion = $datos_sesion->fecha_hora_fin;
@@ -40,7 +40,7 @@ class SessionModel
             $nueva_fecha_hora_fin = strtotime('+1 minute', strtotime($hora_actual));
             $nueva_fecha_hora_fin = date("Y-m-d H:i:s", $nueva_fecha_hora_fin);
 
-            $this->conexion->query("UPDATE sigi_sesiones SET fecha_hora_fin='$nueva_fecha_hora_fin' WHERE id=$id_sesion");
+            $this->conexion->query("UPDATE sesiones SET fecha_hora_fin='$nueva_fecha_hora_fin' WHERE id=$id_sesion");
             return 1;
         } else {
             return 0;
@@ -51,14 +51,14 @@ class SessionModel
 
     public function buscarSesionLoginById($id)
     {
-        $sql = $this->conexion->query("SELECT * FROM sigi_sesiones WHERE id='$id'");
+        $sql = $this->conexion->query("SELECT * FROM sesiones WHERE id='$id'");
         $sql = $sql->fetch_object();
         return $sql;
     }
     public function buscarSesionLoginBySistema($id)
     {
         $arrRespuesta = array();
-        $respuesta = $this->conexion->query("SELECT * FROM sigi_sesiones WHERE id_sistema_integrado='$id'");
+        $respuesta = $this->conexion->query("SELECT * FROM sesiones WHERE id_sistema_integrado='$id'");
         while ($objeto = $respuesta->fetch_object()) {
             array_push($arrRespuesta, $objeto);
         }

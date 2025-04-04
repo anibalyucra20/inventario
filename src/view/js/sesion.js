@@ -38,8 +38,8 @@ async function iniciar_sesion() {
                 cache: 'no-cache',
                 body: formData
             });
-            location.replace(base_url + "intranet");
-            location.replace(base_url + "intranet");
+            location.replace(base_url);
+            location.replace(base_url);
         } else {
             Swal.fire({
                 type: 'error',

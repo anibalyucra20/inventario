@@ -31,10 +31,11 @@
                     <div class="form-group row mb-2">
                         <label for="detalle" class="col-3 col-form-label">Detalle de bienes : </label>
                         <div class="col-9">
-                            <table style="border: 1px solid black ; width:100%;">
+                            <table class="table table-bordered">
                                 <tr>
                                     <th colspan="4" class="text-center">
-                                        Lista de Bienes
+                                        Lista de Bienes 
+                                        <button type="button" class="btn btn-primary">+ Agregar</button>
                                     </th>
                                 </tr>
                                 <tr>
@@ -47,7 +48,7 @@
                                     <td>1</td>
                                     <td>548412</td>
                                     <td>MOnistor integrado all in one</td>
-                                    <td></td>
+                                    <td><button type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
                                 </tr>
                             </table>
                         </div>

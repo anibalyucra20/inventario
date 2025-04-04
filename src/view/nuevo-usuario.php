@@ -42,7 +42,4 @@
     </div>
 </div>
 <script src="<?php echo BASE_URL; ?>src/view/js/functions_usuario.js"></script>
-<script>
-    datos_form();
-</script>
 <!-- end page title -->
