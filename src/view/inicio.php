@@ -127,8 +127,4 @@
         </div><!-- end card-->
     </div> <!-- end col-->
 </div>
-<script src="<?php echo BASE_URL; ?>src/view/js/functions_usuario.js"></script>
-<script>
-    listar_docentesOrdenados();
-</script>
 <!-- end page title -->

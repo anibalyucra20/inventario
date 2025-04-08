@@ -16,33 +16,23 @@
                 <h4 class="card-title">Filtros de Búsqueda</h4>
                 <div class="row col-12">
                     <div class="form-group row mb-3 col-6">
-                        <label for="busqueda_tabla_dni" class="col-5 col-form-label">Código:</label>
-                        <div class="col-7">
-                            <input type="number" class="form-control" name="busqueda_tabla_dni" id="busqueda_tabla_dni">
-                        </div>
-                    </div>
-                    <div class="form-group row mb-3 col-6">
-                        <label for="busqueda_tabla_nomap" class="col-5 col-form-label">Detalle:</label>
-                        <div class="col-7">
-                            <input type="text" class="form-control" name="busqueda_tabla_nomap" id="busqueda_tabla_nomap">
-                        </div>
-                    </div>
-                    <div class="form-group row mb-3 col-6">
-                        <label for="busqueda_tabla_pe" class="col-5 col-form-label">Ambiente:</label>
+                        <label for="busqueda_tabla_ambiente" class="col-5 col-form-label">Ambiente:</label>
                         <input type="hidden" id="pe_actual_filtro" value="0">
                         <div class="col-7">
-                            <select class="form-control" name="busqueda_tabla_pe" id="busqueda_tabla_pe">
+                            <select class="form-control" name="busqueda_tabla_ambiente" id="busqueda_tabla_ambiente">
                             </select>
                         </div>
                     </div>
                     <div class="form-group row mb-3 col-6">
-                        <label for="busqueda_tabla_estado" class="col-5 col-form-label">Estado:</label>
+                        <label for="busqueda_tabla_codigo" class="col-5 col-form-label">Código:</label>
                         <div class="col-7">
-                            <select class="form-control" name="busqueda_tabla_estado" id="busqueda_tabla_estado">
-                                <option value="">TODOS</option>
-                                <option value="1">ACTIVO</option>
-                                <option value="0">INACTIVO</option>
-                            </select>
+                            <input type="number" class="form-control" name="busqueda_tabla_codigo" id="busqueda_tabla_codigo">
+                        </div>
+                    </div>
+                    <div class="form-group row mb-3 col-6">
+                        <label for="busqueda_tabla_denominacion" class="col-5 col-form-label">Denominación:</label>
+                        <div class="col-7">
+                            <input type="text" class="form-control" name="busqueda_tabla_denominacion" id="busqueda_tabla_denominacion">
                         </div>
                     </div>
                 </div>
@@ -56,11 +46,9 @@
                 <h4 class="card-title">Resultados de Búsqueda</h4>
                 <div id="filtros_tabla_header" class="form-group  row page-title-box d-flex align-items-center justify-content-between m-0 mb-1 p-0">
                     <input type="hidden" id="pagina" value="1">
-                    <input type="hidden" id="filtro_dni" value="">
-                    <input type="hidden" id="filtro_nomap" value="">
-                    <input type="hidden" id="filtro_pe" value="">
-                    <input type="hidden" id="filtro_estado" value="">
-                    <input type="hidden" id="filtro_sede" value="">
+                    <input type="hidden" id="filtro_codigo" value="">
+                    <input type="hidden" id="filtro_ambiente" value="">
+                    <input type="hidden" id="filtro_denominacion" value="">
                     <div>
                         <label for="cantidad_mostrar">Mostrar</label>
                         <select name="cantidad_mostrar" id="cantidad_mostrar" class="form-control-sm" onchange="numero_pagina(1);">
@@ -82,14 +70,12 @@
                     </div>
                 </div>
                 <div id="modals_editar"></div>
-                <div id="modals_permisos"></div>
-
             </div>
         </div>
     </div>
 </div>
-<script src="<?php echo BASE_URL; ?>src/view/js/functions_usuario.js"></script>
+<script src="<?php echo BASE_URL; ?>src/view/js/functions_bien.js"></script>
 <script>
-    listar_docentesOrdenados();
+    listar_BienesOrdenados();
 </script>
 <!-- end page title -->

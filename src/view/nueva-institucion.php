@@ -7,9 +7,9 @@
                 <br>
                 <form class="form-horizontal" id="frmRegistrar">
                     <div class="form-group row mb-2">
-                        <label for="dni" class="col-3 col-form-label">Código Modular</label>
+                        <label for="cod_modular" class="col-3 col-form-label">Código Modular</label>
                         <div class="col-9">
-                            <input type="text" class="form-control" id="dni" name="dni">
+                            <input type="text" class="form-control" id="cod_modular" name="cod_modular">
                         </div>
                     </div>
                     <div class="form-group row mb-2">
@@ -19,15 +19,15 @@
                         </div>
                     </div>
                     <div class="form-group row mb-2">
-                        <label for="apellidos_nombres" class="col-3 col-form-label">Nombre</label>
+                        <label for="nombre" class="col-3 col-form-label">Nombre</label>
                         <div class="col-9">
-                            <input type="text" class="form-control" id="apellidos_nombres" name="apellidos_nombres">
+                            <input type="text" class="form-control" id="nombre" name="nombre">
                         </div>
                     </div>
                     <div class="form-group mb-0 justify-content-end row text-center">
                         <div class="col-12">
                         <a href="<?php echo BASE_URL;?>instituciones" class="btn btn-light waves-effect waves-light">Regresar</a>
-                            <button type="button" class="btn btn-success waves-effect waves-light" onclick="registrar_usuario();">Registrar</button>
+                            <button type="button" class="btn btn-success waves-effect waves-light" onclick="registrar_institucion();">Registrar</button>
                         </div>
                     </div>
                 </form>
@@ -35,8 +35,5 @@
         </div>
     </div>
 </div>
-<script src="<?php echo BASE_URL; ?>src/view/js/functions_usuario.js"></script>
-<script>
-    datos_form();
-</script>
+<script src="<?php echo BASE_URL; ?>src/view/js/functions_institucion.js"></script>
 <!-- end page title -->

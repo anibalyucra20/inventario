@@ -29,8 +29,9 @@
     <script>
         const base_url = '<?php echo BASE_URL; ?>';
         const base_url_server = '<?php echo BASE_URL_SERVER; ?>';
-        const session_session = '<?php echo $_SESSION['sesion_sigi_id']; ?>';
-        const token_token = '<?php echo $_SESSION['sesion_sigi_token']; ?>';
+        const session_session = '<?php echo $_SESSION['sesion_id']; ?>';
+        const session_ies = '<?php echo $_SESSION['sesion_ies']; ?>';
+        const token_token = '<?php echo $_SESSION['sesion_token']; ?>';
     </script>
 </head>
 
@@ -61,26 +62,17 @@
                         <div class="dropdown d-inline-block">
                             <button type="button" class="btn header-item waves-effect waves-light"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="d-none d-sm-inline-block ml-1" id="menu_sede">Huanta</span>
+                                <span class="d-none d-sm-inline-block ml-1" id="menu_ies">Huanta</span>
                                 <i class="mdi mdi-chevron-down d-none d-sm-inline-block"></i>
                             </button>
-                            <div class="dropdown-menu dropdown-menu-right" id="contenido_menu_sede">
-                            </div>
-                        </div>
-                        <div class="dropdown d-inline-block">
-                            <button type="button" class="btn header-item waves-effect waves-light"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="d-none d-sm-inline-block ml-1" id="menu_periodo">2023-II</span>
-                                <i class="mdi mdi-chevron-down d-none d-sm-inline-block"></i>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-right" id="contenido_menu_periodo">
+                            <div class="dropdown-menu dropdown-menu-right" id="contenido_menu_ies">
                             </div>
                         </div>
                         <div class="dropdown d-inline-block ml-2">
                             <button type="button" class="btn header-item waves-effect waves-light"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img class="rounded-circle header-profile-user" src="https://cdn-icons-png.flaticon.com/512/1077/1077063.png">
-                                <span class="d-none d-sm-inline-block ml-1"><?php /* echo $_SESSION['sesion_sigi_usuario_nom']; */?></span>
+                                <span class="d-none d-sm-inline-block ml-1"><?php /* echo $_SESSION['sesion_sigi_usuario_nom']; */ ?></span>
                                 <i class="mdi mdi-chevron-down d-none d-sm-inline-block"></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-right">
@@ -106,28 +98,28 @@
 
                         <div class="collapse navbar-collapse" id="topnav-menu-content">
                             <ul class="navbar-nav">
-                                
-                                    <!-- ---------------------------------------------- INICIO MENU SIGI ------------------------------------------------------------ -->
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="<?php echo BASE_URL ?>">
-                                            <i class="mdi mdi-home"></i>Inicio
-                                        </a>
-                                    </li>
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-components" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="mdi mdi-diamond-stone"></i>Gestión <div class="arrow-down"></div>
-                                        </a>
-                                        <div class="dropdown-menu" aria-labelledby="topnav-components">
-                                            <a href="<?php echo BASE_URL ?>usuarios" class="dropdown-item">Usuarios</a>
-                                            <a href="<?php echo BASE_URL ?>instituciones" class="dropdown-item">Instituciones</a>
-                                            <a href="<?php echo BASE_URL ?>ambientes" class="dropdown-item">Ambientes</a>
-                                            <a href="<?php echo BASE_URL ?>bienes" class="dropdown-item">Bienes</a>
-                                            <a href="<?php echo BASE_URL ?>movimientos" class="dropdown-item">Movimientos</a>
-                                            <a href="<?php echo BASE_URL ?>reportes" class="dropdown-item">Reportes</a>
-                                        </div>
-                                    </li>
 
-                                    <!-- ---------------------------------------------- FIN MENU SIGI ------------------------------------------------------------ -->
+                                <!-- ---------------------------------------------- INICIO MENU SIGI ------------------------------------------------------------ -->
+                                <li class="nav-item">
+                                    <a class="nav-link" href="<?php echo BASE_URL ?>">
+                                        <i class="mdi mdi-home"></i>Inicio
+                                    </a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-components" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="mdi mdi-diamond-stone"></i>Gestión <div class="arrow-down"></div>
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="topnav-components">
+                                        <a href="<?php echo BASE_URL ?>usuarios" class="dropdown-item">Usuarios</a>
+                                        <a href="<?php echo BASE_URL ?>instituciones" class="dropdown-item">Instituciones</a>
+                                        <a href="<?php echo BASE_URL ?>ambientes" class="dropdown-item">Ambientes</a>
+                                        <a href="<?php echo BASE_URL ?>bienes" class="dropdown-item">Bienes</a>
+                                        <a href="<?php echo BASE_URL ?>movimientos" class="dropdown-item">Movimientos</a>
+                                        <a href="<?php echo BASE_URL ?>reportes" class="dropdown-item">Reportes</a>
+                                    </div>
+                                </li>
+
+                                <!-- ---------------------------------------------- FIN MENU SIGI ------------------------------------------------------------ -->
                             </ul>
                         </div>
                     </nav>
@@ -149,5 +141,5 @@
                         </div>
                     </div>
                     <script>
-                        //cargar_datos_menu(<?php echo $_SESSION['sesion_sigi_sede']; ?>, <?php echo $_SESSION['sesion_sigi_periodo']; ?>);
+                        cargar_datos_menu(<?php echo $_SESSION['sesion_ies']; ?>);
                     </script>

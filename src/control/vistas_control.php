@@ -11,7 +11,7 @@ class vistasControlador extends vistaModelo
     public function obtenerVistaControlador()
     {
 
-        if (!isset($_SESSION['sesion_sigi_id'])) {
+        if (!isset($_SESSION['sesion_id'])) {
             $respuesta = "login";
         } else {
         if (isset($_GET['views'])) {

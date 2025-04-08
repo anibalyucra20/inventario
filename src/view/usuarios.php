@@ -50,9 +50,7 @@
                     <input type="hidden" id="pagina" value="1">
                     <input type="hidden" id="filtro_dni" value="">
                     <input type="hidden" id="filtro_nomap" value="">
-                    <input type="hidden" id="filtro_pe" value="">
                     <input type="hidden" id="filtro_estado" value="">
-                    <input type="hidden" id="filtro_sede" value="">
                     <div>
                         <label for="cantidad_mostrar">Mostrar</label>
                         <select name="cantidad_mostrar" id="cantidad_mostrar" class="form-control-sm" onchange="numero_pagina(1);">

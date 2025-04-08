@@ -26,12 +26,12 @@ async function alerta_sesion() {
     location.replace(base_url + "login");
 }
 // cargar elementos de menu
-async function cargar_sedes_menu(id_sede = 0) {
+async function cargar_institucion_menu(id_ies = 0) {
     const formData = new FormData();
     formData.append('sesion', session_session);
     formData.append('token', token_token);
     try {
-        let respuesta = await fetch(base_url_server + 'src/control/Sede.php?tipo=listar', {
+        let respuesta = await fetch(base_url_server + 'src/control/Institucion.php?tipo=listar', {
             method: 'POST',
             mode: 'cors',
             cache: 'no-cache',
@@ -43,13 +43,13 @@ async function cargar_sedes_menu(id_sede = 0) {
             let contenido = '';
             let sede = '';
             datos.forEach(item => {
-                if (id_sede == item.id) {
+                if (id_ies == item.id) {
                     sede = item.nombre;
                 }
-                contenido += `<button href="javascript:void(0);" class="dropdown-item notify-item" onclick="actualizar_sede_menu(${item.id});">${item.nombre}</button>`;
+                contenido += `<button href="javascript:void(0);" class="dropdown-item notify-item" onclick="actualizar_ies_menu(${item.id});">${item.nombre}</button>`;
             });
-            document.getElementById('contenido_menu_sede').innerHTML = contenido;
-            document.getElementById('menu_sede').innerHTML = sede;
+            document.getElementById('contenido_menu_ies').innerHTML = contenido;
+            document.getElementById('menu_ies').innerHTML = sede;
         }
         //console.log(respuesta);
     } catch (e) {
@@ -57,48 +57,15 @@ async function cargar_sedes_menu(id_sede = 0) {
     }
 
 }
-async function cargar_periodos_menu(id_periodo = 0) {
-    const formData = new FormData();
-    formData.append('sesion', session_session);
-    formData.append('token', token_token);
-    try {
-        let respuesta = await fetch(base_url_server + 'src/control/PeriodoAcademico.php?tipo=listar', {
-            method: 'POST',
-            mode: 'cors',
-            cache: 'no-cache',
-            body: formData
-        });
-        let json = await respuesta.json();
-        if (json.status) {
-            let datos = json.contenido;
-            let contenido = '';
-            let periodo = '';
-            datos.forEach(item => {
-                contenido += `<button href="javascript:void(0);" class="dropdown-item notify-item" onclick="actualizar_periodo_menu(${item.id});">${item.nombre}</button>`;
-                if (id_periodo == item.id) {
-                    periodo = item.nombre;
-
-                }
-            });
-            document.getElementById('contenido_menu_periodo').innerHTML = contenido;
-            document.getElementById('menu_periodo').innerHTML = periodo;
-        }
-        //console.log(respuesta);
-    } catch (e) {
-        console.log("Error al cargar categorias" + e);
-    }
-}
-
-async function cargar_datos_menu(sede, periodo) {
-    cargar_sedes_menu(sede);
-    cargar_periodos_menu(periodo);
+async function cargar_datos_menu(sede) {
+    cargar_institucion_menu(sede);
 }
 // actualizar elementos del menu
-async function actualizar_sede_menu(id) {
+async function actualizar_ies_menu(id) {
     const formData = new FormData();
-    formData.append('id_sede', id);
+    formData.append('id_ies', id);
     try {
-        let respuesta = await fetch(base_url + 'src/control/sesion_cliente.php?tipo=actualizar_sede_sesion', {
+        let respuesta = await fetch(base_url + 'src/control/sesion_cliente.php?tipo=actualizar_ies_sesion', {
             method: 'POST',
             mode: 'cors',
             cache: 'no-cache',
@@ -110,26 +77,7 @@ async function actualizar_sede_menu(id) {
         }
         //console.log(respuesta);
     } catch (e) {
-        console.log("Error al cargar categorias" + e);
-    }
-}
-async function actualizar_periodo_menu(id) {
-    const formData = new FormData();
-    formData.append('id_periodo', id);
-    try {
-        let respuesta = await fetch(base_url + 'src/control/sesion_cliente.php?tipo=actualizar_periodo_sesion', {
-            method: 'POST',
-            mode: 'cors',
-            cache: 'no-cache',
-            body: formData
-        });
-        let json = await respuesta.json();
-        if (json.status) {
-            location.reload();
-        }
-        //console.log(respuesta);
-    } catch (e) {
-        console.log("Error al cargar categorias" + e);
+        console.log("Error al cargar instituciones" + e);
     }
 }
 function generar_paginacion(total, cantidad_mostrar) {
@@ -192,17 +140,17 @@ function generar_texto_paginacion(total, cantidad_mostrar) {
 }
 // ---------------------------------------------  DATOS DE CARGA PARA FILTRO DE BUSQUEDA -----------------------------------------------
 //cargar programas de estudio
-function cargar_programa_estudio_filtro(programas) {
-    let pe_actual = document.getElementById('pe_actual_filtro').value;
-    lista_pe = `<option value="0">TODOS</option>`;
-    programas.forEach(programa => {
+function cargar_ambientes_filtro(datos) {
+    let ambiente_actual = document.getElementById('filtro_ambiente').value;
+    lista_ambiente = `<option value="0">TODOS</option>`;
+    datos.forEach(ambiente => {
         pe_selected = "";
-        if (programa.id == pe_actual) {
+        if (ambiente.id == ambiente_actual) {
             pe_selected = "selected";
         }
-        lista_pe += `<option value="${programa.id}" ${pe_selected}>${programa.nombre}</option>`;
+        lista_ambiente += `<option value="${ambiente.id}" ${pe_selected}>${ambiente.detalle}</option>`;
     });
-    document.getElementById('busqueda_tabla_pe').innerHTML = lista_pe;
+    document.getElementById('busqueda_tabla_ambiente').innerHTML = lista_ambiente;
 }
 //cargar programas de estudio
 function cargar_sede_filtro(sedes) {

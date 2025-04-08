@@ -16,44 +16,23 @@
                 <h4 class="card-title">Filtros de Búsqueda</h4>
                     <div class="row col-12">
                         <div class="form-group row mb-3 col-6">
-                            <label for="busqueda_tabla_dni" class="col-5 col-form-label">Nro de Documento:</label>
+                            <label for="busqueda_tabla_codigo" class="col-5 col-form-label">Código Modular:</label>
                             <div class="col-7">
-                                <input type="number" class="form-control" name="busqueda_tabla_dni" id="busqueda_tabla_dni">
+                                <input type="text" class="form-control" name="busqueda_tabla_codigo" id="busqueda_tabla_codigo">
                             </div>
                         </div>
                         <div class="form-group row mb-3 col-6">
-                            <label for="busqueda_tabla_nomap" class="col-5 col-form-label">Apellidos y Nombres:</label>
+                            <label for="busqueda_tabla_ruc" class="col-5 col-form-label">Ruc:</label>
                             <div class="col-7">
-                                <input type="text" class="form-control" name="busqueda_tabla_nomap" id="busqueda_tabla_nomap">
+                                <input type="text" class="form-control" name="busqueda_tabla_ruc" id="busqueda_tabla_ruc">
                             </div>
                         </div>
                         <div class="form-group row mb-3 col-6">
-                            <label for="busqueda_tabla_pe" class="col-5 col-form-label">Programa de Estudios:</label>
-                            <input type="hidden" id="pe_actual_filtro" value="0">
+                            <label for="busqueda_tabla_insti" class="col-5 col-form-label">Institución:</label>
                             <div class="col-7">
-                                <select class="form-control" name="busqueda_tabla_pe" id="busqueda_tabla_pe">
-                                </select>
+                                <input type="text" class="form-control" name="busqueda_tabla_insti" id="busqueda_tabla_insti">
                             </div>
                         </div>
-                        <div class="form-group row mb-3 col-6">
-                            <label for="busqueda_tabla_estado" class="col-5 col-form-label">Estado:</label>
-                            <div class="col-7">
-                                <select class="form-control" name="busqueda_tabla_estado" id="busqueda_tabla_estado">
-                                    <option value="">TODOS</option>
-                                    <option value="1">ACTIVO</option>
-                                    <option value="0">INACTIVO</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row mb-3 col-6">
-                            <label for="busqueda_tabla_sede" class="col-5 col-form-label">Estado:</label>
-                            <input type="hidden" id="sede_actual_filtro" value="0">
-                            <div class="col-7">
-                                <select class="form-control" name="busqueda_tabla_sede" id="busqueda_tabla_sede">
-                                </select>
-                            </div>
-                        </div>
-
                     </div>
                     <div class="form-group mb-0 text-center ">
                         <button type="button" class="btn btn-primary waves-effect waves-light" onclick="numero_pagina(1);"><i class="fa fa-search"></i> Buscar</button>
@@ -65,11 +44,9 @@
                 <h4 class="card-title">Resultados de Búsqueda</h4>
                 <div id="filtros_tabla_header" class="form-group  row page-title-box d-flex align-items-center justify-content-between m-0 mb-1 p-0">
                     <input type="hidden" id="pagina" value="1">
-                    <input type="hidden" id="filtro_dni" value="">
-                    <input type="hidden" id="filtro_nomap" value="">
-                    <input type="hidden" id="filtro_pe" value="">
-                    <input type="hidden" id="filtro_estado" value="">
-                    <input type="hidden" id="filtro_sede" value="">
+                    <input type="hidden" id="filtro_ruc" value="">
+                    <input type="hidden" id="filtro_codigo" value="">
+                    <input type="hidden" id="filtro_insti" value="">
                     <div>
                         <label for="cantidad_mostrar">Mostrar</label>
                         <select name="cantidad_mostrar" id="cantidad_mostrar" class="form-control-sm" onchange="numero_pagina(1);">
@@ -98,8 +75,8 @@
         </div>
     </div>
 </div>
-<script src="<?php echo BASE_URL; ?>src/view/js/functions_usuario.js"></script>
+<script src="<?php echo BASE_URL; ?>src/view/js/functions_institucion.js"></script>
 <script>
-    listar_docentesOrdenados();
+    listar_instituciones();
 </script>
 <!-- end page title -->

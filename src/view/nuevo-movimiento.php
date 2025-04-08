@@ -30,26 +30,31 @@
                     </div>
                     <div class="form-group row mb-2">
                         <label for="detalle" class="col-3 col-form-label">Detalle de bienes : </label>
+                        <input type="hidden" id="detalle_bienes" name="detalle_bienes">
                         <div class="col-9">
                             <table class="table table-bordered">
-                                <tr>
-                                    <th colspan="4" class="text-center">
-                                        Lista de Bienes 
-                                        <button type="button" class="btn btn-primary">+ Agregar</button>
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <th>Nro</th>
-                                    <th>Código</th>
-                                    <th>Detalle</th>
-                                    <th>Acción</th>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>548412</td>
-                                    <td>MOnistor integrado all in one</td>
-                                    <td><button type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
-                                </tr>
+                                <thead>
+                                    <tr>
+                                        <th colspan="4" class="text-center">
+                                            Lista de Bienes
+                                            <button type="button" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target=".modal_agregar">+ Agregar</button>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th>Nro</th>
+                                        <th>Código</th>
+                                        <th>Denominación</th>
+                                        <th>Acción</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>548412</td>
+                                        <td>MOnistor integrado all in one</td>
+                                        <td><button type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
+                                    </tr>
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -60,11 +65,64 @@
                         </div>
                     </div>
                 </form>
+                <div class="modal fade modal_agregar" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h6 class="modal-title h5" id="myLargeModalLabel">Agregar Bien a Movimiento</h6>
+                                <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="frmAgregarBienes">
+                                    <div class="form-group row mb-2">
+                                        <label for="codigo_patrimonial" class="col-3 col-form-label">Código Patrimonial y/o denominación:</label>
+                                        <div class="col-6">
+                                            <input type="text" name="codigo_patrimonial" id="codigo_patrimonial" class="form-control">
+                                        </div>
+                                        <div class="col-3">
+                                            <button type="button" class="btn btn-primary" onclick="fn_buscar_bien_movimiento();"><i class="fa fa-search"></i> Buscar</button>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-2">
+                                        <table class="table table-bordered" style="width: 100%;">
+                                            <thead>
+                                                <tr>
+                                                    <th>Código Patrimonial</th>
+                                                    <th>Denominación</th>
+                                                    <th>Ambiente</th>
+                                                    <th>Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="detalle_busqueda_bienes">
+                                                <tr>
+                                                    <td>105515</td>
+                                                    <td>BIEN PRUEBA</td>
+                                                    <td>103</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-success"><i class="fa fa-plus"></i></button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <br>
+                                    <div class="form-group mb-0 justify-content-end row text-center">
+                                        <div class="col-12">
+                                            <button type="button" class="btn btn-light waves-effect waves-light" data-dismiss="modal">Cancelar</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-<script src="<?php echo BASE_URL; ?>src/view/js/functions_usuario.js"></script>
+<script src="<?php echo BASE_URL; ?>src/view/js/functions_movimiento.js"></script>
 <script>
     datos_form();
 </script>

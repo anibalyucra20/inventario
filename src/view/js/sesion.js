@@ -25,12 +25,11 @@ async function iniciar_sesion() {
         if (json.status) {
             //swal("Iniciar Sesion", json.mensaje, "success");
             const formData = new FormData();
-            formData.append('session', json.contenido['sesion_sigi_id']);
-            formData.append('usuario', json.contenido['sesion_sigi_usuario']);
-            formData.append('nombres_apellidos', json.contenido['sesion_sigi_usuario_nom']);
-            formData.append('token', json.contenido['sesion_sigi_token']);
-            formData.append('id_periodo', json.contenido['sesion_sigi_periodo']);
-            formData.append('id_sede', json.contenido['sesion_sigi_sede']);
+            formData.append('session', json.contenido['sesion_id']);
+            formData.append('usuario', json.contenido['sesion_usuario']);
+            formData.append('nombres_apellidos', json.contenido['sesion_usuario_nom']);
+            formData.append('token', json.contenido['sesion_token']);
+            formData.append('id_ies', json.contenido['sesion_ies']);
 
             fetch(base_url + 'src/control/sesion_cliente.php?tipo=iniciar_sesion', {
                 method: 'POST',
