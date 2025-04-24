@@ -59,33 +59,6 @@
      <!-- App js -->
      <script src="<?php echo BASE_URL ?>src/view/pp/assets/js/theme.js"></script>
      <script src="<?php echo BASE_URL ?>src/view/js/sesion.js"></script>
-
-
-     <script>
-         $(document).ready(function() {
-             $('#example').DataTable({
-                 "language": {
-                     "processing": "Procesando...",
-                     "lengthMenu": "Mostrar _MENU_ registros",
-                     "zeroRecords": "No se encontraron resultados",
-                     "emptyTable": "Ningún dato disponible en esta tabla",
-                     "sInfo": "Mostrando del _START_ al _END_ de un total de _TOTAL_ registros",
-                     "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-                     "infoFiltered": "(filtrado de un total de _MAX_ registros)",
-                     "search": "Buscar:",
-                     "infoThousands": ",",
-                     "loadingRecords": "Cargando...",
-                     "paginate": {
-                         "first": "Primero",
-                         "last": "Último",
-                         "next": "Siguiente",
-                         "previous": "Anterior"
-                     },
-                 }
-             });
-
-         });
-     </script>
      </body>
 
      </html>

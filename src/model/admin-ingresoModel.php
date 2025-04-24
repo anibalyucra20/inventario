@@ -1,7 +1,7 @@
 <?php
 require_once "../library/conexion.php";
 
-class BienModel
+class IngresoModel
 {
 
     private $conexion;
@@ -10,9 +10,9 @@ class BienModel
         $this->conexion = new Conexion();
         $this->conexion = $this->conexion->connect();
     }
-    public function registrarBien($ambiente, $cod_patrimonial, $denominacion, $marca, $modelo, $tipo, $color, $serie, $dimensiones, $valor, $situacion, $estado_conservacion, $observaciones, $id_usuario,$id_ingreso)
+    public function registrarIngreso($detalle, $id_usuario)
     {
-        $sql = $this->conexion->query("INSERT INTO bienes (id_ingreso_bienes ,id_ambiente,cod_patrimonial, denominacion, marca,modelo,tipo,color,serie,dimensiones,valor,situacion,estado_conservacion,observaciones,usuario_registro ) VALUES ('$id_ingreso','$ambiente', '$cod_patrimonial','$denominacion', '$marca', '$modelo', '$tipo', '$color', '$serie', '$dimensiones', '$valor', '$situacion', '$estado_conservacion', '$observaciones', '$id_usuario')");
+        $sql = $this->conexion->query("INSERT INTO ingreso_bienes (detalle  ,id_usuario) VALUES ('$detalle', '$id_usuario')");
         if ($sql) {
             $sql = $this->conexion->insert_id;
         } else {
@@ -20,23 +20,18 @@ class BienModel
         }
         return $sql;
     }
-    public function actualizarBien($id, $cod_patrimonial, $denominacion, $marca, $modelo, $tipo, $color, $serie, $dimensiones, $valor, $situacion, $estado_conservacion, $observaciones)
+    public function actualizarIngreso($id, $ambiente, $cod_patrimonial, $denominacion, $marca, $modelo, $tipo, $color, $serie, $dimensiones, $valor, $situacion, $estado_conservacion, $observaciones)
     {
-        $sql = $this->conexion->query("UPDATE bienes SET cod_patrimonial='$cod_patrimonial',denominacion='$denominacion',marca='$marca',modelo='$modelo',tipo='$tipo',color='$color',serie='$serie',dimensiones='$dimensiones',valor='$valor',situacion='$situacion',estado_conservacion='$estado_conservacion',observaciones='$observaciones' WHERE id='$id'");
+        $sql = $this->conexion->query("UPDATE bienes SET id_ambiente='$ambiente',cod_patrimonial='$cod_patrimonial',denominacion='$denominacion',marca='$marca',modelo='$modelo',tipo='$tipo',color='$color',serie='$serie',dimensiones='$dimensiones',valor='$valor',situacion='$situacion',estado_conservacion='$estado_conservacion',observaciones='$observaciones' WHERE id='$id'");
         return $sql;
     }
-    public function actualizarBien_Ambiente($id, $nuevo_ambiente)
-    {
-        $sql = $this->conexion->query("UPDATE bienes SET id_ambiente='$nuevo_ambiente'WHERE id='$id'");
-        return $sql;
-    }
-    public function buscarBienById($id)
+    public function buscarIngresoById($id)
     {
         $sql = $this->conexion->query("SELECT * FROM bienes WHERE id='$id'");
         $sql = $sql->fetch_object();
         return $sql;
     }
-    public function buscarBienes_filtro($filtro, $ambiente)
+    public function buscarIngreso_filtro($filtro, $ambiente)
     {
         $arrRespuesta = array();
         $sql = $this->conexion->query("SELECT * FROM bienes WHERE (cod_patrimonial LIKE '$filtro%' OR denominacion LIKE '%$filtro%') AND id_ambiente='$ambiente'");
@@ -45,20 +40,20 @@ class BienModel
         }
         return $arrRespuesta;
     }
-    public function buscarBienByCodigoPatrimonial($codigo)
+    public function buscarIngresoByCodigoPatrimonial($codigo)
     {
         $sql = $this->conexion->query("SELECT * FROM bienes WHERE cod_patrimonial ='$codigo'");
         $sql = $sql->fetch_object();
         return $sql;
     }
-    public function buscarBienByCpdigoInstitucion($codigo, $institucion)
+    public function buscarIngresoByCpdigoInstitucion($codigo, $institucion)
     {
         $sql = $this->conexion->query("SELECT * FROM bienes WHERE codigo='$codigo' AND id_ies='$institucion'");
         $sql = $sql->fetch_object();
         return $sql;
     }
 
-    public function buscarBienesOrderByDenominacion_tabla_filtro($busqueda_tabla_codigo, $busqueda_tabla_ambiente, $busqueda_tabla_denominacion, $ies)
+    public function buscarIngresoOrderByDenominacion_tabla_filtro($busqueda_tabla_codigo, $busqueda_tabla_ambiente, $busqueda_tabla_denominacion, $ies)
     {
         //condicionales para busqueda
         $condicion = "";
@@ -74,7 +69,7 @@ class BienModel
         }
         return $arrRespuesta;
     }
-    public function buscarBienesOrderByDenominacion_tabla($pagina, $cantidad_mostrar, $busqueda_tabla_codigo, $busqueda_tabla_ambiente, $busqueda_tabla_denominacion, $ies)
+    public function buscarIngresoOrderByDenominacion_tabla($pagina, $cantidad_mostrar, $busqueda_tabla_codigo, $busqueda_tabla_ambiente, $busqueda_tabla_denominacion, $ies)
     {
         //condicionales para busqueda
         $condicion = "";

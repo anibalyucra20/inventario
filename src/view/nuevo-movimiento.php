@@ -8,15 +8,13 @@
                 <form class="form-horizontal" id="frmRegistrar">
                     <div class="form-group row mb-2">
                         <label for="ambiente_origen" class="col-3 col-form-label">Ambiente de Origen:</label>
-                        <input type="hidden" id="sede_actual_filtro" value="0">
                         <div class="col-9">
-                            <select class="form-control" name="ambiente_origen" id="ambiente_origen">
+                            <select class="form-control" name="ambiente_origen" id="ambiente_origen" onchange="reiniciar_movimiento();">
                             </select>
                         </div>
                     </div>
                     <div class="form-group row mb-2">
                         <label for="ambiente_destino" class="col-3 col-form-label">Ambiente Destino:</label>
-                        <input type="hidden" id="sede_actual_filtro" value="0">
                         <div class="col-9">
                             <select class="form-control" name="ambiente_destino" id="ambiente_destino">
                             </select>
@@ -30,7 +28,6 @@
                     </div>
                     <div class="form-group row mb-2">
                         <label for="detalle" class="col-3 col-form-label">Detalle de bienes : </label>
-                        <input type="hidden" id="detalle_bienes" name="detalle_bienes">
                         <div class="col-9">
                             <table class="table table-bordered">
                                 <thead>
@@ -47,21 +44,17 @@
                                         <th>Acción</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>548412</td>
-                                        <td>MOnistor integrado all in one</td>
-                                        <td><button type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
-                                    </tr>
+                                <tbody id="contenido_bienes_tabla_movimientos">
+
                                 </tbody>
+                                
                             </table>
                         </div>
                     </div>
                     <div class="form-group mb-0 justify-content-end row text-center">
                         <div class="col-12">
                             <a href="<?php echo BASE_URL; ?>movimientos" class="btn btn-light waves-effect waves-light">Regresar</a>
-                            <button type="button" class="btn btn-success waves-effect waves-light" onclick="registrar_usuario();">Registrar</button>
+                            <button type="button" class="btn btn-success waves-effect waves-light" onclick="registrar_movimiento();">Registrar</button>
                         </div>
                     </div>
                 </form>
@@ -77,15 +70,15 @@
                             <div class="modal-body">
                                 <form id="frmAgregarBienes">
                                     <div class="form-group row mb-2">
-                                        <label for="codigo_patrimonial" class="col-3 col-form-label">Código Patrimonial y/o denominación:</label>
+                                        <label for="codigo_patrimonial_form" class="col-3 col-form-label">Código Patrimonial y/o denominación:</label>
                                         <div class="col-6">
-                                            <input type="text" name="codigo_patrimonial" id="codigo_patrimonial" class="form-control">
+                                            <input type="text" name="codigo_patrimonial" id="codigo_patrimonial_form" class="form-control">
                                         </div>
                                         <div class="col-3">
-                                            <button type="button" class="btn btn-primary" onclick="fn_buscar_bien_movimiento();"><i class="fa fa-search"></i> Buscar</button>
+                                            <button type="button" class="btn btn-primary" onclick="buscar_bien();"><i class="fa fa-search"></i> Buscar</button>
                                         </div>
                                     </div>
-                                    <div class="form-group row mb-2">
+                                    <div class="form-group row mb-2" id="tabla_bienes">
                                         <table class="table table-bordered" style="width: 100%;">
                                             <thead>
                                                 <tr>
@@ -96,14 +89,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody id="detalle_busqueda_bienes">
-                                                <tr>
-                                                    <td>105515</td>
-                                                    <td>BIEN PRUEBA</td>
-                                                    <td>103</td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-success"><i class="fa fa-plus"></i></button>
-                                                    </td>
-                                                </tr>
+                                                
                                             </tbody>
                                         </table>
                                     </div>
@@ -125,5 +111,8 @@
 <script src="<?php echo BASE_URL; ?>src/view/js/functions_movimiento.js"></script>
 <script>
     datos_form();
+    var lista_bienes_movimiento =[];
+    var bienes;
+    var v_ambientes;
 </script>
 <!-- end page title -->

@@ -7,6 +7,13 @@
                 <br>
                 <form class="form-horizontal" id="frmRegistrar">
                     <div class="form-group row mb-2">
+                        <label for="beneficiario" class="col-3 col-form-label">Beneficiario:</label>
+                        <div class="col-9">
+                            <select class="form-control" name="beneficiario" id="beneficiario">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-2">
                         <label for="cod_modular" class="col-3 col-form-label">Código Modular</label>
                         <div class="col-9">
                             <input type="text" class="form-control" id="cod_modular" name="cod_modular">
@@ -26,7 +33,7 @@
                     </div>
                     <div class="form-group mb-0 justify-content-end row text-center">
                         <div class="col-12">
-                        <a href="<?php echo BASE_URL;?>instituciones" class="btn btn-light waves-effect waves-light">Regresar</a>
+                            <a href="<?php echo BASE_URL; ?>instituciones" class="btn btn-light waves-effect waves-light">Regresar</a>
                             <button type="button" class="btn btn-success waves-effect waves-light" onclick="registrar_institucion();">Registrar</button>
                         </div>
                     </div>
@@ -36,4 +43,7 @@
     </div>
 </div>
 <script src="<?php echo BASE_URL; ?>src/view/js/functions_institucion.js"></script>
+<script>
+    datos_form();
+</script>
 <!-- end page title -->

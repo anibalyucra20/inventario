@@ -33,6 +33,7 @@
         const session_ies = '<?php echo $_SESSION['sesion_ies']; ?>';
         const token_token = '<?php echo $_SESSION['sesion_token']; ?>';
     </script>
+    <?php date_default_timezone_set('America/Lima');  ?>
 </head>
 
 <body>

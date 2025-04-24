@@ -63,7 +63,7 @@
     <h1>404</h1>
     <p>¡Ups! La página que buscas no está disponible.</p>
     <p>Es posible que haya sido eliminada o que la URL sea incorrecta.</p>
-    <a href="/SIGI">Regresar al inicio</a>
+    <a href="/inventario">Regresar al inicio</a>
   </div>
 </body>
 </html>

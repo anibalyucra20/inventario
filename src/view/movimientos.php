@@ -16,31 +16,34 @@
                 <h4 class="card-title">Filtros de Búsqueda</h4>
                 <div class="row col-12">
                     <div class="form-group row mb-3 col-6">
-                        <label for="busqueda_tabla_pe" class="col-5 col-form-label">Ambiente de Origen:</label>
-                        <input type="hidden" id="pe_actual_filtro" value="0">
+                        <label for="busqueda_tabla_amb_origen" class="col-5 col-form-label">Ambiente de Origen:</label>
                         <div class="col-7">
-                            <select class="form-control" name="busqueda_tabla_pe" id="busqueda_tabla_pe">
+                            <select class="form-control" name="busqueda_tabla_amb_origen" id="busqueda_tabla_amb_origen">
                             </select>
                         </div>
                     </div>
                     <div class="form-group row mb-3 col-6">
-                        <label for="busqueda_tabla_pe" class="col-5 col-form-label">Ambiente de Destino:</label>
-                        <input type="hidden" id="pe_actual_filtro" value="0">
+                        <label for="busqueda_tabla_amb_destino" class="col-5 col-form-label">Ambiente de Destino:</label>
                         <div class="col-7">
-                            <select class="form-control" name="busqueda_tabla_pe" id="busqueda_tabla_pe">
+                            <select class="form-control" name="busqueda_tabla_amb_destino" id="busqueda_tabla_amb_destino">
                             </select>
                         </div>
                     </div>
+                    <?php
+                    $hoy = date("Y-m-d");
+                    $fecha_antes = strtotime('-1 months', strtotime($hoy));
+                    $fecha_antes = date('Y-m-d', $fecha_antes);
+                    ?>
                     <div class="form-group row mb-3 col-6">
-                        <label for="fecha_desde" class="col-5 col-form-label">Desde:</label>
+                        <label for="busqueda_fecha_desde" class="col-5 col-form-label">Desde:</label>
                         <div class="col-7">
-                            <input type="date" class="form-control" name="fecha_desde" id="fecha_desde">
+                            <input type="date" class="form-control" name="busqueda_fecha_desde" id="busqueda_fecha_desde" max="<?php echo $hoy; ?>" value="<?php echo $fecha_antes; ?>">
                         </div>
                     </div>
                     <div class="form-group row mb-3 col-6">
-                        <label for="fecha_hasta" class="col-5 col-form-label">Hasta:</label>
+                        <label for="busqueda_fecha_hasta" class="col-5 col-form-label">Hasta:</label>
                         <div class="col-7">
-                            <input type="date" class="form-control" name="fecha_hasta" id="fecha_hasta">
+                            <input type="date" class="form-control" name="busqueda_fecha_hasta" id="busqueda_fecha_hasta" max="<?php echo $hoy; ?>" value="<?php echo $hoy; ?>">
                         </div>
                     </div>
                 </div>
@@ -54,11 +57,10 @@
                 <h4 class="card-title">Resultados de Búsqueda</h4>
                 <div id="filtros_tabla_header" class="form-group  row page-title-box d-flex align-items-center justify-content-between m-0 mb-1 p-0">
                     <input type="hidden" id="pagina" value="1">
-                    <input type="hidden" id="filtro_dni" value="">
-                    <input type="hidden" id="filtro_nomap" value="">
-                    <input type="hidden" id="filtro_pe" value="">
-                    <input type="hidden" id="filtro_estado" value="">
-                    <input type="hidden" id="filtro_sede" value="">
+                    <input type="hidden" id="filtro_ambiente_origen" value="">
+                    <input type="hidden" id="filtro_ambiente_destino" value="">
+                    <input type="hidden" id="filtro_fecha_inicio" value="">
+                    <input type="hidden" id="filtro_fecha_fin" value="">
                     <div>
                         <label for="cantidad_mostrar">Mostrar</label>
                         <select name="cantidad_mostrar" id="cantidad_mostrar" class="form-control-sm" onchange="numero_pagina(1);">
@@ -86,8 +88,8 @@
         </div>
     </div>
 </div>
-<script src="<?php echo BASE_URL; ?>src/view/js/functions_usuario.js"></script>
+<script src="<?php echo BASE_URL; ?>src/view/js/functions_movimiento.js"></script>
 <script>
-    listar_docentesOrdenados();
+    listar_MovimientosOrdenados();
 </script>
 <!-- end page title -->

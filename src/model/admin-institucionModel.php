@@ -10,9 +10,9 @@ class InstitucionModel
         $this->conexion = new Conexion();
         $this->conexion = $this->conexion->connect();
     }
-    public function registrarInstitucion($cod_modular, $ruc, $nombre)
+    public function registrarInstitucion($beneficiario,$cod_modular, $ruc, $nombre)
     {
-        $sql = $this->conexion->query("INSERT INTO institucion (cod_modular, ruc, nombre) VALUES ('$cod_modular','$ruc','$nombre')");
+        $sql = $this->conexion->query("INSERT INTO institucion (beneficiario, cod_modular, ruc, nombre) VALUES ('$beneficiario','$cod_modular','$ruc','$nombre')");
         if ($sql) {
             $sql = $this->conexion->insert_id;
         } else {
@@ -20,9 +20,9 @@ class InstitucionModel
         }
         return $sql;
     }
-    public function actualizarInstitucion($id, $cod_modular, $ruc, $nombre)
+    public function actualizarInstitucion($id, $beneficiario, $cod_modular, $ruc, $nombre)
     {
-        $sql = $this->conexion->query("UPDATE institucion SET cod_modular='$cod_modular',ruc='$ruc',nombre='$nombre' WHERE id='$id'");
+        $sql = $this->conexion->query("UPDATE institucion SET beneficiario= '$beneficiario', cod_modular='$cod_modular',ruc='$ruc',nombre='$nombre' WHERE id='$id'");
         return $sql;
     }
     public function buscarInstitucionOrdenado()

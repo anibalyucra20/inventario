@@ -113,7 +113,7 @@ function generarfilastabla(item, ambientes) {
                         <label for="ambiente${item.id}" class="col-3 col-form-label">Ambiente:</label>
                         <input type="hidden" id="sede_actual_filtro" value="0">
                         <div class="col-9">
-                            <select class="form-control" name="ambiente" id="ambiente${item.id}">
+                            <select class="form-control" name="ambiente" id="ambiente${item.id}" disabled>
                             ${lista_ambiente}
                             </select>
                         </div>
@@ -222,7 +222,8 @@ async function datos_form() {
         });
         json = await respuesta.json();
         if (json.status) {
-            listar_ambientes(json.contenido)
+            listar_ambientes(json.contenido);
+            v_ambientes = json.contenido;
         } else if (json.msg == "Error_Sesion") {
             alerta_sesion();
         }
@@ -233,7 +234,7 @@ async function datos_form() {
         ocultarPopupCarga();
     }
 }
-async function listar_ambientes(datos,ambiente='ambiente') {
+async function listar_ambientes(datos, ambiente = 'ambiente') {
     try {
         let contenido_select = '<option value="">Seleccione</option>';
         if (Array.isArray(datos)) {
@@ -249,36 +250,140 @@ async function listar_ambientes(datos,ambiente='ambiente') {
     }
 
 }
-async function registrar_bien() {
-    let ambiente = document.querySelector('#ambiente').value;
-    let cod_patrimonial = document.querySelector('#cod_patrimonial').value;
-    let denominacion = document.querySelector('#denominacion').value;
-    let marca = document.querySelector('#marca').value;
-    let modelo = document.querySelector('#modelo').value;
-    let tipo = document.querySelector('#tipo').value;
-    let color = document.querySelector('#color').value;
-    let serie = document.querySelector('#serie').value;
-    let dimensiones = document.querySelector('#dimensiones').value;
-    let valor = document.querySelector('#valor').value;
-    let situacion = document.querySelector('#situacion').value;
-    let estado_conservacion = document.querySelector('#estado_conservacion').value;
-    let observaciones = document.querySelector('#observaciones').value;
-    if (ambiente == "" || cod_patrimonial == "" || denominacion == "" || marca == "" || modelo == "" || tipo == "" || color == "" || serie == "" || dimensiones == "" || valor == "" || situacion == "" || estado_conservacion == "" || observaciones == "") {
+function listar_bienes_ingreso() {
+    try {
+        mostrarPopupCarga();
+        document.querySelector('#contenido_bienes_tabla_ingresos').innerHTML = '';
+        let cont = 1;
+        $(".filas_tabla_bienes").each(function () {
+            cont++;
+        });
+        let index = 0;
+        let contador = 0
+        lista_bienes_registro.forEach(item => {
+            let nueva_fila = document.createElement("tr");
+            nueva_fila.id = "fila" + item.id;
+            nueva_fila.className = "filas_tabla_bienes";
+
+            nombre_amb = '';
+
+            v_ambientes.forEach(ambiente => {
+                if (ambiente.id == item.ambiente) {
+                    nombre_amb = ambiente.detalle;
+                }
+            })
+            nueva_fila.innerHTML = `
+                            <th>${contador}</th>
+                            <td>${item.cod_patrimonial}</td>
+                            <td>${item.denominacion}</td>
+                            <td>${nombre_amb}</td>
+                            <td><button type="button" class="btn btn-danger" onclick="eliminar_bien_ingreso(${index});"><i class="fa fa-trash"></i></button></td>
+                `;
+            document.querySelector('#contenido_bienes_tabla_ingresos').appendChild(nueva_fila);
+            index++;
+            contador++;
+        });
+        //console.log(lista_bienes_registro);
+
+    } catch (error) {
+        console.log("ocurrio un error al agregar el bien " + error);
+    } finally {
+        ocultarPopupCarga();
+    }
+}
+function agregar_bien_ingreso() {
+    try {
+        mostrarPopupCarga();
+        let ambiente = document.querySelector('#ambiente').value;
+        let cod_patrimonial = document.querySelector('#cod_patrimonial').value;
+        let denominacion = document.querySelector('#denominacion').value;
+        let marca = document.querySelector('#marca').value;
+        let modelo = document.querySelector('#modelo').value;
+        let tipo = document.querySelector('#tipo').value;
+        let color = document.querySelector('#color').value;
+        let serie = document.querySelector('#serie').value;
+        let dimensiones = document.querySelector('#dimensiones').value;
+        let valor = document.querySelector('#valor').value;
+        let situacion = document.querySelector('#situacion').value;
+        let estado_conservacion = document.querySelector('#estado_conservacion').value;
+        let observaciones = document.querySelector('#observaciones').value;
+        if (ambiente == "" || denominacion == "" || marca == "" || modelo == "" || tipo == "" || color == "" || serie == "" || dimensiones == "" || valor == "" || situacion == "" || estado_conservacion == "" || observaciones == "") {
+            Swal.fire({
+                type: 'error',
+                title: 'Error',
+                text: 'Campos vacíos',
+                confirmButtonClass: 'btn btn-confirm mt-2',
+                footer: ''
+            })
+            return;
+        }
+        let cont = 0;
+        lista_bienes_registro.forEach(bien => {
+            if (bien.cod_patrimonial == cod_patrimonial && cod_patrimonial != "") {
+                cont++;
+            }
+        });
+        if (cont == 0) {
+            let nuevo_bien = new Object();
+            nuevo_bien.ambiente = ambiente;
+            nuevo_bien.cod_patrimonial = cod_patrimonial;
+            nuevo_bien.denominacion = denominacion;
+            nuevo_bien.marca = marca;
+            nuevo_bien.modelo = modelo;
+            nuevo_bien.tipo = tipo;
+            nuevo_bien.color = color;
+            nuevo_bien.serie = serie;
+            nuevo_bien.dimensiones = dimensiones;
+            nuevo_bien.valor = valor;
+            nuevo_bien.situacion = situacion;
+            nuevo_bien.estado_conservacion = estado_conservacion;
+            nuevo_bien.observaciones = observaciones;
+            lista_bienes_registro.push(nuevo_bien);
+            document.getElementById("frmAgregarBienes").reset();
+            //console.log(nuevo_bien);
+            console.log(lista_bienes_registro);
+            listar_bienes_ingreso();
+        } else {
+            Swal.fire({
+                type: 'error',
+                title: 'Error',
+                text: 'El código patrimonial ya esta agregado en la lista de ingreso de bienes',
+                confirmButtonClass: 'btn btn-confirm mt-2',
+                footer: ''
+            })
+            return;
+        }
+
+    } catch (e) {
+        console.log("Oops, ocurrio un error al agregar bien a ingreso" + e);
+    } finally {
+        ocultarPopupCarga();
+    }
+}
+function eliminar_bien_ingreso(index) {
+    lista_bienes_registro.splice(index, 1);
+    listar_bienes_ingreso();
+}
+async function registrar_ingreso() {
+    let descripcion = document.querySelector('#descripcion').value;
+    if (descripcion == "" || lista_bienes_registro.length == 0) {
         Swal.fire({
             type: 'error',
             title: 'Error',
-            text: 'Campos vacíos',
+            text: 'Campos vacíos y/o falta agregar bienes',
             confirmButtonClass: 'btn btn-confirm mt-2',
             footer: ''
         })
         return;
     }
     try {
+        mostrarPopupCarga();
         // capturamos datos del formulario html
         const datos = new FormData(frmRegistrar);
         datos.append('sesion', session_session);
         datos.append('token', token_token);
         datos.append('ies', session_ies);
+        datos.append('bienes', JSON.stringify(lista_bienes_registro));
         //enviar datos hacia el controlador
         let respuesta = await fetch(base_url_server + 'src/control/Bien.php?tipo=registrar', {
             method: 'POST',
@@ -289,6 +394,7 @@ async function registrar_bien() {
         json = await respuesta.json();
         if (json.status) {
             document.getElementById("frmRegistrar").reset();
+            document.getElementById("contenido_bienes_tabla_ingresos").innerHTML = '';
             Swal.fire({
                 type: 'success',
                 title: 'Registro',
@@ -313,12 +419,11 @@ async function registrar_bien() {
         //console.log(json);
     } catch (e) {
         console.log("Oops, ocurrio un error " + e);
+    } finally {
+        ocultarPopupCarga();
     }
 }
-
 async function actualizarBien(id) {
-    let ambiente = document.querySelector('#ambiente' + id).value;
-    let cod_patrimonial = document.querySelector('#cod_patrimonial' + id).value;
     let denominacion = document.querySelector('#denominacion' + id).value;
     let marca = document.querySelector('#marca' + id).value;
     let modelo = document.querySelector('#modelo' + id).value;
@@ -330,7 +435,7 @@ async function actualizarBien(id) {
     let situacion = document.querySelector('#situacion' + id).value;
     let estado_conservacion = document.querySelector('#estado_conservacion' + id).value;
     let observaciones = document.querySelector('#observaciones' + id).value;
-    if (ambiente == "" || cod_patrimonial == "" || denominacion == "" || marca == "" || modelo == "" || tipo == "" || color == "" || serie == "" || dimensiones == "" || valor == "" || situacion == "" || estado_conservacion == "" || observaciones == "") {
+    if (denominacion == "" || marca == "" || modelo == "" || tipo == "" || color == "" || serie == "" || dimensiones == "" || valor == "" || situacion == "" || estado_conservacion == "" || observaciones == "") {
         Swal.fire({
             type: 'error',
             title: 'Error',

@@ -17,7 +17,6 @@
                 <div class="row col-12">
                     <div class="form-group row mb-3 col-6">
                         <label for="busqueda_tabla_ambiente" class="col-5 col-form-label">Ambiente:</label>
-                        <input type="hidden" id="pe_actual_filtro" value="0">
                         <div class="col-7">
                             <select class="form-control" name="busqueda_tabla_ambiente" id="busqueda_tabla_ambiente">
                             </select>

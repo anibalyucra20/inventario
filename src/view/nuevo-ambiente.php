@@ -7,6 +7,12 @@
                 <br>
                 <form class="form-horizontal" id="frmRegistrar">
                     <div class="form-group row mb-2">
+                        <label for="encargado" class="col-3 col-form-label">Usuario encargado :</label>
+                        <div class="col-9">
+                            <input type="text" class="form-control" id="encargado" name="encargado" placeholder="DNI, apellidos y nombres">
+                        </div>
+                    </div>
+                    <div class="form-group row mb-2">
                         <label for="codigo" class="col-3 col-form-label">Código</label>
                         <div class="col-9">
                             <input type="text" class="form-control" id="codigo" name="codigo">

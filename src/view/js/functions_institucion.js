@@ -2,6 +2,49 @@ function numero_pagina(pagina) {
     document.getElementById('pagina').value = pagina;
     listar_instituciones();
 }
+async function datos_form() {
+    try {
+        mostrarPopupCarga();
+        // capturamos datos del formulario html
+        const datos = new FormData();
+        datos.append('sesion', session_session);
+        datos.append('token', token_token);
+        datos.append('ies', session_ies);
+        //enviar datos hacia el controlador
+        let respuesta = await fetch(base_url_server + 'src/control/Institucion.php?tipo=datos_registro', {
+            method: 'POST',
+            mode: 'cors',
+            cache: 'no-cache',
+            body: datos
+        });
+        json = await respuesta.json();
+        if (json.status) {
+            listar_usuarios(json.contenido);
+        } else if (json.msg == "Error_Sesion") {
+            alerta_sesion();
+        }
+        //console.log(json);
+    } catch (e) {
+        console.log("Oops, ocurrio un error " + e);
+    } finally {
+        ocultarPopupCarga();
+    }
+}
+function listar_usuarios(contenido, elemento = 'beneficiario', usuario = 0) {
+    try {
+        let contenido_select = '<option value="">Seleccione</option>';
+        if (Array.isArray(contenido)) {
+            contenido.forEach(usuario => {
+                contenido_select += '<option value="' + usuario.id + '">' + usuario.nombre + '</option>';
+            });
+            document.getElementById(elemento).innerHTML = contenido_select;
+        }
+
+    } catch (error) {
+        console.log("ocurrio un error al listar sedes " + error);
+    }
+
+}
 async function listar_instituciones() {
     try {
         mostrarPopupCarga();
@@ -41,6 +84,7 @@ async function listar_instituciones() {
                             <th>Código Modular</th>
                             <th>Ruc</th>
                             <th>Institución</th>
+                            <th>Beneficiario</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -51,7 +95,7 @@ async function listar_instituciones() {
         if (json.status) {
             let datos = json.contenido;
             datos.forEach(item => {
-                generarfilastabla(item);
+                generarfilastabla(item, json.usuarios);
             });
         } else if (json.msg == "Error_Sesion") {
             alerta_sesion();
@@ -69,10 +113,20 @@ async function listar_instituciones() {
         ocultarPopupCarga();
     }
 }
-function generarfilastabla(item) {
+function generarfilastabla(item, usuarios) {
     let cont = 1;
     $(".filas_tabla").each(function () {
         cont++;
+    })
+    lista_usuarios = `<option value="">Seleccione</option>`;
+    nombre_usuario= '';
+    usuarios.forEach(usuario => {
+        usu_selected = "";
+        if (usuario.id == item.beneficiario) {
+            usu_selected = "selected";
+            nombre_usuario = usuario.nombre;
+        }
+        lista_usuarios += `<option value="${usuario.id}" ${usu_selected}>${usuario.nombre}</option>`;
     })
     let nueva_fila = document.createElement("tr");
     nueva_fila.id = "fila" + item.id;
@@ -82,6 +136,7 @@ function generarfilastabla(item) {
                             <td>${item.cod_modular}</td>
                             <td>${item.ruc}</td>
                             <td>${item.nombre}</td>
+                            <td>${nombre_usuario}</td>
                             <td>${item.options}</td>
                 `;
     document.querySelector('#modals_editar').innerHTML += `<div class="modal fade modal_editar${item.id}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -96,6 +151,13 @@ function generarfilastabla(item) {
                                         <div class="modal-body">
                                             <div class="col-12">
                                                 <form class="form-horizontal" id="frmActualizar${item.id}">
+                                                    <div class="form-group row mb-2">
+                                                        <label for="beneficiario${item.id}" class="col-3 col-form-label">Beneficiario:</label>
+                                                        <div class="col-9">
+                                                            <select class="form-control" name="beneficiario" id="beneficiario${item.id}">${lista_usuarios}
+                                                            </select>
+                                                        </div>
+                                                    </div>
                                                     <div class="form-group row mb-2">
                                                         <label for="cod_modular${item.id}" class="col-3 col-form-label">Código Modular</label>
                                                         <div class="col-9">
@@ -131,10 +193,11 @@ function generarfilastabla(item) {
 
 }
 async function registrar_institucion() {
+    let beneficiario = document.getElementById('beneficiario').value;
     let cod_modular = document.getElementById('cod_modular').value;
     let ruc = document.querySelector('#ruc').value;
     let nombre = document.querySelector('#nombre').value;
-    if (cod_modular == "" || ruc == "" || nombre == "") {
+    if (cod_modular == "" || ruc == "" || nombre == "" || beneficiario == "") {
         Swal.fire({
             type: 'error',
             title: 'Error',
@@ -186,10 +249,11 @@ async function registrar_institucion() {
     }
 }
 async function actualizarInstitucion(id) {
+    let beneficiario = document.getElementById('beneficiario' + id).value;
     let cod_modular = document.getElementById('cod_modular' + id).value;
     let ruc = document.querySelector('#ruc' + id).value;
     let nombre = document.querySelector('#nombre' + id).value;
-    if (cod_modular == "" || ruc == "" || nombre == "") {
+    if (cod_modular == "" || ruc == "" || nombre == "" || beneficiario == "") {
         Swal.fire({
             type: 'error',
             title: 'Error',

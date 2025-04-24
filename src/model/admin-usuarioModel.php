@@ -45,13 +45,13 @@ class UsuarioModel
     }
     public function buscarUsuarioByNomAp($nomap)
     {
-        $sql = $this->conexion->query("SELECT * FROM usuarios WHERE apellidos_nombres='$nomap'");
+        $sql = $this->conexion->query("SELECT * FROM usuarios WHERE nombres_apellidos='$nomap'");
         $sql = $sql->fetch_object();
         return $sql;
     }
     public function buscarUsuarioByApellidosNombres_like($dato)
     {
-        $sql = $this->conexion->query("SELECT * FROM usuarios WHERE apellidos_nombres LIKE '%$dato%'");
+        $sql = $this->conexion->query("SELECT * FROM usuarios WHERE nombres_apellidos LIKE '%$dato%'");
         $sql = $sql->fetch_object();
         return $sql;
     }
@@ -60,6 +60,15 @@ class UsuarioModel
         $sql = $this->conexion->query("SELECT * FROM usuarios WHERE dni='$dni' AND correo='$correo'");
         $sql = $sql->fetch_object();
         return $sql;
+    }
+    public function buscarUsuariosOrdenados()
+    {
+        $arrRespuesta = array();
+        $sql = $this->conexion->query("SELECT * FROM usuarios WHERE estado='1' ORDER BY nombres_apellidos ASC ");
+        while ($objeto = $sql->fetch_object()) {
+            array_push($arrRespuesta, $objeto);
+        }
+        return $arrRespuesta;
     }
    
     public function buscarUsuariosOrderByApellidosNombres_tabla_filtro($busqueda_tabla_dni, $busqueda_tabla_nomap, $busqueda_tabla_estado)

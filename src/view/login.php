@@ -94,7 +94,7 @@
   <div class="login-container">
     <h1>Iniciar Sesión</h1>
     <img src="https://sispa.iestphuanta.edu.pe/img/logo.png" alt="" width="100%">
-    <h4>SIGI - Sistema Integrado de Gestión Institucional</h4>
+    <h4>Sistema de Control de Inventario</h4>
     <form id="frm_login">
       <input type="text" name="dni" id="dni" placeholder="DNI" required>
       <input type="password" name="password" id="password" placeholder="Contraseña" required>

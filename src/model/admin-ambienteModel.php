@@ -10,9 +10,9 @@ class AmbienteModel
         $this->conexion = new Conexion();
         $this->conexion = $this->conexion->connect();
     }
-    public function registrarAmbiente($institucion, $codigo, $detalle, $otros_detalle)
+    public function registrarAmbiente($institucion, $encargado, $codigo, $detalle, $otros_detalle)
     {
-        $sql = $this->conexion->query("INSERT INTO ambientes_institucion (id_ies,codigo, detalle, otros_detalle) VALUES ('$institucion','$codigo','$detalle','$otros_detalle')");
+        $sql = $this->conexion->query("INSERT INTO ambientes_institucion (id_ies,encargado,codigo, detalle, otros_detalle) VALUES ('$institucion','$encargado','$codigo','$detalle','$otros_detalle')");
         if ($sql) {
             $sql = $this->conexion->insert_id;
         } else {
@@ -20,9 +20,9 @@ class AmbienteModel
         }
         return $sql;
     }
-    public function actualizarAmbiente($id, $id_ies, $codigo, $detalle, $otros_detalle)
+    public function actualizarAmbiente($id, $id_ies, $encargado, $codigo, $detalle, $otros_detalle)
     {
-        $sql = $this->conexion->query("UPDATE ambientes_institucion SET id_ies='$id_ies',codigo='$codigo',detalle='$detalle',otros_detalle='$otros_detalle' WHERE id='$id'");
+        $sql = $this->conexion->query("UPDATE ambientes_institucion SET id_ies='$id_ies', encargado='$encargado', codigo='$codigo',detalle='$detalle',otros_detalle='$otros_detalle' WHERE id='$id'");
         return $sql;
     }
     public function buscarAmbienteById($id)
@@ -31,7 +31,7 @@ class AmbienteModel
         $sql = $sql->fetch_object();
         return $sql;
     }
-  
+
     public function buscarUsuarioByNom($nomap)
     {
         $sql = $this->conexion->query("SELECT * FROM ambientes_institucion WHERE apellidos_nombres='$nomap'");
@@ -53,7 +53,7 @@ class AmbienteModel
         $sql = $sql->fetch_object();
         return $sql;
     }
-   
+
     public function buscarAmbientesOrderByApellidosNombres_tabla_filtro($busqueda_tabla_codigo, $busqueda_tabla_ambiente, $ies)
     {
         //condicionales para busqueda
@@ -79,7 +79,4 @@ class AmbienteModel
         }
         return $arrRespuesta;
     }
-
-
-
 }

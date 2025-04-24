@@ -36,6 +36,7 @@ async function listar_ambientesOrdenados() {
                     <thead>
                         <tr>
                             <th>Nro</th>
+                            <th>Usuario/encargado</th>
                             <th>Código</th>
                             <th>Institución</th>
                             <th>Detalle</th>
@@ -88,6 +89,7 @@ function generarfilastabla(item, instituciones) {
     })
     nueva_fila.innerHTML = `
                             <th>${cont}</th>
+                            <td>${item.encargado}</td>
                             <td>${item.codigo}</td>
                             <td>${nombre_ies}</td>
                             <td>${item.detalle}</td>
@@ -111,6 +113,12 @@ function generarfilastabla(item, instituciones) {
                                                             <select name="id_ies" id="id_ies${item.id}" class="form-control">
                                                             ${lista_ies}
                                                             </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row mb-2">
+                                                        <label for="encargado${item.id}" class="col-3 col-form-label">Usuario encargado :</label>
+                                                        <div class="col-9">
+                                                            <input type="text" class="form-control" id="encargado${item.id}" name="encargado" value="${item.encargado}">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row mb-2">
@@ -219,7 +227,6 @@ async function registrar_ambiente() {
         console.log("Oops, ocurrio un error " + e);
     }
 }
-
 async function actualizarAmbiente(id) {
     let id_ies = document.getElementById('id_ies' + id).value;
     let codigo = document.querySelector('#codigo' + id).value;

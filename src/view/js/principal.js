@@ -12,7 +12,6 @@ function ocultarPopupCarga() {
         popup.style.display = 'none';
     }
 }
-
 //funcion en caso de session acudacada
 async function alerta_sesion() {
     Swal.fire({
@@ -140,8 +139,8 @@ function generar_texto_paginacion(total, cantidad_mostrar) {
 }
 // ---------------------------------------------  DATOS DE CARGA PARA FILTRO DE BUSQUEDA -----------------------------------------------
 //cargar programas de estudio
-function cargar_ambientes_filtro(datos) {
-    let ambiente_actual = document.getElementById('filtro_ambiente').value;
+function cargar_ambientes_filtro(datos, form = 'busqueda_tabla_ambiente', filtro = 'filtro_ambiente') {
+    let ambiente_actual = document.getElementById(filtro).value;
     lista_ambiente = `<option value="0">TODOS</option>`;
     datos.forEach(ambiente => {
         pe_selected = "";
@@ -150,7 +149,7 @@ function cargar_ambientes_filtro(datos) {
         }
         lista_ambiente += `<option value="${ambiente.id}" ${pe_selected}>${ambiente.detalle}</option>`;
     });
-    document.getElementById('busqueda_tabla_ambiente').innerHTML = lista_ambiente;
+    document.getElementById(form).innerHTML = lista_ambiente;
 }
 //cargar programas de estudio
 function cargar_sede_filtro(sedes) {
