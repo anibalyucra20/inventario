@@ -33,7 +33,7 @@ class MovimientoModel
 
     public function buscarMovimientoById($id)
     {
-        $sql = $this->conexion->query("SELECT * FROM ambientes_institucion WHERE id='$id'");
+        $sql = $this->conexion->query("SELECT * FROM movimientos WHERE id='$id'");
         $sql = $sql->fetch_object();
         return $sql;
     }

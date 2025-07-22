@@ -7,6 +7,7 @@ require_once('../model/admin-bienModel.php');
 require_once('../model/admin-institucionModel.php');
 require_once('../model/admin-usuarioModel.php');
 require_once('../model/adminModel.php');
+require_once "../config/config.php";
 $tipo = $_GET['tipo'];
 
 //instanciar la clase categoria model
@@ -19,8 +20,8 @@ $objInstitucion = new InstitucionModel();
 $objUsuario = new UsuarioModel();
 
 //variables de sesion
-$id_sesion = $_POST['sesion'];
-$token = $_POST['token'];
+$id_sesion = $_REQUEST['sesion'];
+$token = $_REQUEST['token'];
 
 if ($tipo == "listar") {
     $arr_Respuesta = array('status' => false, 'msg' => 'Error_Sesion');
@@ -60,17 +61,17 @@ if ($tipo == "listar_movimientos_ordenados_tabla") {
         //repuesta
         $arr_Respuesta = array('status' => false, 'contenido' => '');
         $busqueda_filtro = $objMovimiento->buscarMovimiento_tabla_filtro($busqueda_tabla_amb_origen, $busqueda_tabla_amb_destino, $busqueda_fecha_desde, $busqueda_fecha_hasta, $ies);
-        $arr_Ambiente = $objMovimiento->buscarMovimiento_tabla($pagina, $cantidad_mostrar, $busqueda_tabla_amb_origen, $busqueda_tabla_amb_destino, $busqueda_fecha_desde, $busqueda_fecha_hasta, $ies);
+        $arr_Movimiento = $objMovimiento->buscarMovimiento_tabla($pagina, $cantidad_mostrar, $busqueda_tabla_amb_origen, $busqueda_tabla_amb_destino, $busqueda_fecha_desde, $busqueda_fecha_hasta, $ies);
         $arr_Ambientes = $objAmbiente->buscarAmbienteByInstitucion($ies);
         $arr_Respuesta['ambientes'] = $arr_Ambientes;
         $arr_contenido = [];
-        if (!empty($arr_Ambiente)) {
+        if (!empty($arr_Movimiento)) {
             // recorremos el array para agregar las opciones de las categorias
-            for ($i = 0; $i < count($arr_Ambiente); $i++) {
+            for ($i = 0; $i < count($arr_Movimiento); $i++) {
                 // definimos el elemento como objeto
                 $arr_contenido[$i] = (object) [];
-                $arr_Usuario = $objUsuario->buscarUsuarioById($arr_Ambiente[$i]->id_usuario_registro);
-                $arr_Detalle_movimiento = $objMovimiento->buscarDetalle_MovimientoByMovimiento($arr_Ambiente[$i]->id);
+                $arr_Usuario = $objUsuario->buscarUsuarioById($arr_Movimiento[$i]->id_usuario_registro);
+                $arr_Detalle_movimiento = $objMovimiento->buscarDetalle_MovimientoByMovimiento($arr_Movimiento[$i]->id);
                 $arr_contenido_detalle_movimiento = [];
                 if (!empty($arr_Detalle_movimiento)) {
                     for ($j = 0; $j < count($arr_Detalle_movimiento); $j++) {
@@ -82,13 +83,14 @@ if ($tipo == "listar_movimientos_ordenados_tabla") {
                 }
                 $arr_contenido[$i]->detalle_bienes = $arr_contenido_detalle_movimiento;
                 // agregamos solo la informacion que se desea enviar a la vista
-                $arr_contenido[$i]->id = $arr_Ambiente[$i]->id;
-                $arr_contenido[$i]->ambiente_origen = $arr_Ambiente[$i]->id_ambiente_origen;
-                $arr_contenido[$i]->ambiente_destino = $arr_Ambiente[$i]->id_ambiente_destino;
+                $arr_contenido[$i]->id = $arr_Movimiento[$i]->id;
+                $arr_contenido[$i]->ambiente_origen = $arr_Movimiento[$i]->id_ambiente_origen;
+                $arr_contenido[$i]->ambiente_destino = $arr_Movimiento[$i]->id_ambiente_destino;
                 $arr_contenido[$i]->usuario_registro = $arr_Usuario->nombres_apellidos;
-                $arr_contenido[$i]->fecha_registro = $arr_Ambiente[$i]->fecha_registro;
-                $arr_contenido[$i]->descripcion = $arr_Ambiente[$i]->descripcion;
-                $opciones = '<button type="button" title="Ver" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target=".modal_ver' . $arr_Ambiente[$i]->id . '"><i class="fa fa-eye"></i></button>';
+                $arr_contenido[$i]->fecha_registro = $arr_Movimiento[$i]->fecha_registro;
+                $arr_contenido[$i]->descripcion = $arr_Movimiento[$i]->descripcion;
+                $opciones = '<button type="button" title="Ver" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target=".modal_ver' . $arr_Movimiento[$i]->id . '"><i class="fa fa-eye"></i></button>
+                <a type="button" title="Imprimir" class="btn btn-info waves-effect waves-light" target="_blank" href="' . BASE_URL . 'imprimir-movimiento/' . $arr_Movimiento[$i]->id . '"><i class="fa fa-print"></i></a>';
                 $arr_contenido[$i]->options = $opciones;
             }
             $arr_Respuesta['total'] = count($busqueda_filtro);
@@ -151,7 +153,6 @@ if ($tipo == "registrar") {
     }
     echo json_encode($arr_Respuesta);
 }
-
 if ($tipo == "actualizar") {
     $arr_Respuesta = array('status' => false, 'msg' => 'Error_Sesion');
     if ($objSesion->verificar_sesion_si_activa($id_sesion, $token)) {
@@ -203,4 +204,76 @@ if ($tipo == "datos_registro") {
         $arr_Respuesta['msg'] = "Datos encontrados";
     }
     echo json_encode($arr_Respuesta);
+}
+if ($tipo == "imprimir_movimiento") {
+    $html = '<h1>Error de impresion</h1>';
+    if ($objSesion->verificar_sesion_si_activa($id_sesion, $token)) {
+        $id_movimiento = $_GET['data'];
+        $arr_movimiento = $objMovimiento->buscarMovimientoById($id_movimiento);
+        $arr_Ambiente_origen = $objAmbiente->buscarAmbienteById($arr_movimiento->id_ambiente_origen);
+        $arr_Ambiente_destino = $objAmbiente->buscarAmbienteById($arr_movimiento->id_ambiente_destino);
+        $arr_Detalle_movimiento = $objMovimiento->buscarDetalle_MovimientoByMovimiento($id_movimiento);
+        $contenido_tabla = '
+        <table cellpadding="4">
+            <thead>
+            </thead>
+            <tbody>
+                <tr>
+                    <td width="15%">ENTIDAD</td>
+                    <td width="85%">: DIRECCION REGIONAL DE EDUCACION -AYACUCHO</td>
+                </tr>
+                <tr>
+                    <td>AREA</td>
+                    <td>: OFICINA DE ADMINISTRACIÓN</td>
+                </tr>
+                <tr>
+                    <td>ORIGEN</td>
+                    <td>: '.$arr_Ambiente_origen->detalle.'</td>
+                </tr>
+                <tr>
+                    <td>DESTINO</td>
+                    <td>: '.$arr_Ambiente_destino->detalle.'</td>
+                </tr>
+                <tr>
+                    <td>MOTIVO</td>
+                    <td>: '.$arr_movimiento->descripcion.'</td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <br>
+        <table border="1" cellpadding="4">
+        <thead>
+            <tr style="text-align:center;">
+                <th width="7%"><h5>ITEM</h5></th>
+                <th width="13%"><h5>CODIGO PATRIMONIAL</h5></th>
+                <th width="32%"><h5>NOMBRE DEL BIEN</h5></th>
+                <th width="12%"><h5>MARCA</h5></th>
+                <th width="12%"><h5>SERIE</h5></th>
+                <th width="12%"><h5>COLOR</h5></th>
+                <th width="12%"><h5>ESTADO</h5></th>
+            </tr>
+        </thead>
+        <tbody>';
+        if (!empty($arr_Detalle_movimiento)) {
+            for ($j = 0; $j < count($arr_Detalle_movimiento); $j++) {
+                $cont=$j+1;
+                $arr_bien = $objBien->buscarBienById($arr_Detalle_movimiento[$j]->id_bien);
+                $contenido_tabla .= '<tr><td width="7%" style="text-align:center;"><h6>'.$cont.'</h6></td>';
+                $contenido_tabla .= '<td width="13%"><h6>' . $arr_bien->cod_patrimonial . '</h6></td>';
+                $contenido_tabla .= '<td width="32%"><h6>' . $arr_bien->denominacion . '</h6></td>';
+                $contenido_tabla .= '<td width="12%"><h6>' . $arr_bien->marca . '</h6></td>';
+                $contenido_tabla .= '<td width="12%"><h6>' . $arr_bien->serie . '</h6></td>';
+                $contenido_tabla .= '<td width="12%"><h6>' . $arr_bien->color . '</h6></td>';
+                $contenido_tabla .= '<td width="12%"><h6>' . $arr_bien->estado_conservacion . '</h6></td>';
+                $contenido_tabla .= '</tr>';
+            }
+        }
+        $contenido_tabla .= '
+        </tbody>
+        </table>';
+
+        $html = $contenido_tabla;
+    }
+    echo $html;
 }

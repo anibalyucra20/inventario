@@ -120,7 +120,7 @@ function generarfilastabla(item, ambientes, bienes) {
                                 <div class="modal-dialog modal-lg">
                                     <div class="modal-content">
                                         <div class="modal-header text-center">
-                                            <h5 class="modal-title h4 " id="myLargeModalLabel">Actualizar datos de docente</h5>
+                                            <h5 class="modal-title h4 " id="myLargeModalLabel">Ver Información de Movimiento de Bienes</h5>
                                             <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
@@ -459,7 +459,6 @@ async function registrar_movimiento() {
         console.log("Oops, ocurrio un error " + e);
     }
 }
-
 async function actualizarMovimiento(id) {
     let ambiente = document.querySelector('#ambiente' + id).value;
     let cod_patrimonial = document.querySelector('#cod_patrimonial' + id).value;
