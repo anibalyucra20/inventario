@@ -119,6 +119,16 @@
                                         <a href="<?php echo BASE_URL ?>reportes" class="dropdown-item">Reportes</a>
                                     </div>
                                 </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-components" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="mdi mdi-diamond-stone"></i>API <div class="arrow-down"></div>
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="topnav-components">
+                                        <a href="<?php echo BASE_URL ?>api-client" class="dropdown-item">Clientes</a>
+                                        <a href="<?php echo BASE_URL ?>api-token" class="dropdown-item">Token</a>
+                                        <a href="<?php echo BASE_URL ?>api-count" class="dropdown-item">Contador</a>
+                                    </div>
+                                </li>
 
                                 <!-- ---------------------------------------------- FIN MENU SIGI ------------------------------------------------------------ -->
                             </ul>
