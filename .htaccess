@@ -1,3 +1,16 @@
-RewriteEngine ON
-Options -Indexes +FollowSymLinks -MultiViews
-RewriteRule ^([a-zA-Z0-9/ñÑ-]+)$ index.php?views=$1
+# No listar directorios; symlinks seguros; desactiva MultiViews
+Options -Indexes +SymLinksIfOwnerMatch -MultiViews
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Si el recurso existe, NO reescribir
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # Ruteo a index.php pasando "views"
+  # Permite letras (incluye ñ/Ñ), números, guion y "/"
+  RewriteRule ^([A-Za-z0-9/ñÑ-]+)$ index.php?views=$1 [QSA,L,NC]
+</IfModule>
