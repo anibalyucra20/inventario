@@ -1,30 +1,23 @@
-<?php
-require_once('../model/admin-apiModel.php');
-require_once('../model/admin-sesionModel.php');
-require_once('../model/admin-usuarioModel.php');
-require_once('../model/adminModel.php');
-$tipo = $_GET['tipo'];
+<!DOCTYPE html>
+<html lang="en">
 
-//instanciar la clase categoria model
-$objApi = new ApiModel();
-$objSesion = new SessionModel();
-$objUsuario = new UsuarioModel();
-$objAdmin = new AdminModel();
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
 
-//variables de sesion
-$token = $_POST['token'];
-// consultas de API
-if ($tipo = "verBienApiByNombre") {
-    $token_arr = explode("-", $token);
-    $id_cliente = $token_arr[2];
-    $arr_Cliente = $objApi->buscarClienteById($id_cliente);
-    if ($arr_Cliente->estado==1) {
-        $data = $_POST['data'];
-        $arr_bienes = $objApi->buscarBienByDenominacion($data);
-        $arr_Respuesta = array('status' => true, 'msg' => '', 'contenido'=>$arr_bienes);
-    }else {
-        $arr_Respuesta = array('status' => false, 'msg' => 'Error, cliente no activo.');
-    }
-    echo json_encode($arr_Respuesta);
-}
+<body>
+    <input type="text" id="ruta_api" value="https://api.sigi.pe/">
+    <form action="" id="frmApi">
+        <input type="text" value="12a1be6cec17998b27d3724ced4dd7b2-20251003-1" name="token" id="token">
+        <input type="text" name="dato" id="dato">
+        <br>
+    </form>
+    <button id="btn_buscar" onclick="llamar_api();">Buscar</button>
+    <br>
+    <div id="contenido"></div>
+</body>
+<script src="<?php echo BASE_URL; ?>src/view/js/api.js"></script>
 
+</html>
