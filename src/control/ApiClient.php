@@ -254,7 +254,7 @@ if ($tipo == "listar_tokens_ordenados_tabla") {
     }
     echo json_encode($arr_Respuesta);
 }
-// consultas de API
+/*// consultas de API
 if ($tipo = "verBienApiByNombre") {
     $token_arr = explode("-", $token);
     $id_cliente = $token_arr[2];
@@ -267,5 +267,5 @@ if ($tipo = "verBienApiByNombre") {
         $arr_Respuesta = array('status' => false, 'msg' => 'Error, cliente no activo.');
     }
     echo json_encode($arr_Respuesta);
-}
+}*/
 
