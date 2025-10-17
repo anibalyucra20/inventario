@@ -17,9 +17,10 @@ $token = $_POST['token'];
 // consultas de API
 if ($tipo = "verBienApiByNombre") {
     $token_arr = explode("-", $token);
+    echo $token_arr;
     $id_cliente = $token_arr[2];
     $arr_Cliente = $objApi->buscarClienteById($id_cliente);
-    if ($arr_Cliente->estado==1) {
+    if ($arr_Cliente->estado) {
         $data = $_POST['data'];
         $arr_bienes = $objApi->buscarBienByDenominacion($data);
         $arr_Respuesta = array('status' => true, 'msg' => '', 'contenido'=>$arr_bienes);
