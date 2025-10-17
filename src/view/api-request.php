@@ -11,7 +11,7 @@
     <input type="text" id="ruta_api" value="https://api.sigi.pe/">
     <form action="" id="frmApi">
         <input type="text" value="12a1be6cec17998b27d3724ced4dd7b2-20251003-1" name="token" id="token">
-        <input type="text" name="dato" id="dato">
+        <input type="text" name="data" id="data">
         <br>
     </form>
     <button id="btn_buscar" onclick="llamar_api();">Buscar</button>

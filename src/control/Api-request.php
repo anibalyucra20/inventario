@@ -10,14 +10,13 @@ $objApi = new ApiModel();
 $objSesion = new SessionModel();
 $objUsuario = new UsuarioModel();
 $objAdmin = new AdminModel();
-
+header('Content-Type: application/json');
+header("Access-Control-Allow-Origin: *");
 //variables de sesion
 $token = $_POST['token'];
-echo $token;
 // consultas de API
 if ($tipo = "verBienApiByNombre") {
     $token_arr = explode("-", $token);
-    echo $token_arr;
     $id_cliente = $token_arr[2];
     $arr_Cliente = $objApi->buscarClienteById($id_cliente);
     if ($arr_Cliente->estado) {
