@@ -16,7 +16,19 @@
     </form>
     <button id="btn_buscar" onclick="llamar_api();">Buscar</button>
     <br>
-    <div id="contenido"></div>
+    <table border="1" cellspacing="0" cellpadding="5">
+        <thead>
+            <tr>
+                <th>Nro</th>
+                <td>Codigo Patrimonial</td>
+                <td>Denominacion</td>
+                <td>Ambiente</td>
+            </tr>
+        </thead>
+        <tbody id="contenido">
+
+        </tbody>
+    </table>
 </body>
 <script src="<?php echo BASE_URL; ?>src/view/js/api.js"></script>
 

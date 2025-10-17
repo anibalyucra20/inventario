@@ -3,7 +3,7 @@ async function llamar_api() {
     const datos = new FormData(formulario);
     let ruta_api = document.getElementById('ruta_api').value;
     try {
-        let respuesta = await fetch('https://api.sigi.pe/src/control/Api-request.php?tipo=verBienApiByNombre', {
+        let respuesta = await fetch(ruta_api+'/src/control/Api-request.php?tipo=verBienApiByNombre', {
             method: 'POST',
             mode: 'cors',
             cache: 'no-cache',
@@ -11,8 +11,14 @@ async function llamar_api() {
         });
         json = await respuesta.json();
         let contenidosss = '';
+        let cont=0;
         json.contenido.forEach(Element => {
-            contenidosss+=Element.denominacion+"<br>";
+            cont++;
+            contenidosss+="<tr>";
+            contenidosss+="<td>"+cont+"</td>";
+            contenidosss+="<td>"+Element.cod_patrimonial+"</td>";
+            contenidosss+="<td>"+Element.denominacion+"</td>";
+            contenidosss+="<td>"+Element.id_ambiente+"</td>";
         });
         document.getElementById('contenido').innerHTML = contenidosss;
     } catch (error) {

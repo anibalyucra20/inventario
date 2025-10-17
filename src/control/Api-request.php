@@ -1,4 +1,7 @@
 <?php
+header('Content-Type: application/json');
+header("Access-Control-Allow-Origin: *");
+
 require_once('../model/admin-apiModel.php');
 require_once('../model/admin-sesionModel.php');
 require_once('../model/admin-usuarioModel.php');
@@ -10,8 +13,7 @@ $objApi = new ApiModel();
 $objSesion = new SessionModel();
 $objUsuario = new UsuarioModel();
 $objAdmin = new AdminModel();
-header('Content-Type: application/json');
-header("Access-Control-Allow-Origin: *");
+
 //variables de sesion
 $token = $_POST['token'];
 // consultas de API
