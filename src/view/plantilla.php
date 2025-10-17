@@ -46,7 +46,7 @@ if (isset($_SESSION['sesion_id']) && isset($_SESSION['sesion_token'])) {
     }
 }
 
-if ($vista == "login" || $vista == "404") {
+if ($vista == "login" || $vista == "404"|| $vista == "api-request") {
     require_once "./src/view/" . $vista . ".php";
 } else {
     if ($vista != './src/view/imprimir-movimiento.php') {

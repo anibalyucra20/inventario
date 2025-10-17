@@ -17,6 +17,8 @@ class vistaModelo
             $contenido = "inicio.php";
         } elseif ($vista == "login") {
             $contenido = "login";
+        } elseif ($vista == "api-request") {
+            $contenido = "api-request";
         } else {
             $contenido = "404";
         }

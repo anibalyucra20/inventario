@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once('../model/admin-apiModel.php');
 require_once('../model/admin-sesionModel.php');
 require_once('../model/admin-usuarioModel.php');
@@ -13,7 +12,6 @@ $objUsuario = new UsuarioModel();
 $objAdmin = new AdminModel();
 
 //variables de sesion
-$id_sesion = $_POST['sesion'];
 $token = $_POST['token'];
 
 if ($tipo == "registrar") {
@@ -259,7 +257,7 @@ if ($tipo = "verBienApiByNombre") {
     $token_arr = explode("-", $token);
     $id_cliente = $token_arr[2];
     $arr_Cliente = $objApi->buscarClienteById($id_cliente);
-    if ($arr_Cliente->estado) {
+    if ($arr_Cliente->estado==1) {
         $data = $_POST['data'];
         $arr_bienes = $objApi->buscarBienByDenominacion($data);
         $arr_Respuesta = array('status' => true, 'msg' => '', 'contenido'=>$arr_bienes);
