@@ -13,7 +13,7 @@ $objAdmin = new AdminModel();
 
 //variables de sesion
 $token = $_POST['token'];
-
+echo $token;
 // consultas de API
 if ($tipo = "verBienApiByNombre") {
     $token_arr = explode("-", $token);
